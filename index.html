@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1: Video Generation Evaluation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .video-wrapper {
+            text-align: center;
+            margin: 0 20px;
+        }
+        .questions {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+        .questions p {
+            margin: 10px 0;
+        }
+        .pair-header {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 30px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            max-width: 500px;
+            margin: auto;
+        }
+        .close-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .gt-video {
+            margin-bottom: 15px;
+        }
+        .gt-label {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task 1: Video Generation Evaluation</h1>
+    <p style="font-size: 16px; color: #555;">
+        For each example, you will see a <b>Ground Truth</b> video and two generated videos (A and B).<br>
+        Please compare the two generated videos and answer the questions below.
+    </p>
+    <p style="font-size: 14px; color: #d9534f; font-weight: bold;">
+        Please watch all videos carefully before answering.
+    </p>
+
+    <form id="evaluation-form">
+        <div id="video-pairs"></div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="thank-you-modal" class="modal">
+        <div class="modal-content">
+            <p>Thank you for your submission!</p>
+            <button class="close-btn" id="close-btn">OK</button>
+        </div>
+    </div>
+
+    <script>
+        const competitorMethods = ["ati", "magicmotion"];
+        const totalPairs = 10;
+
+        let pairInfo = Array(totalPairs).fill(null).map(() => ({
+            competitor: "",
+            sport: "",
+            filename: "",
+            oursInA: false
+        }));
+
+        const basketballSamples = [
+            "343836663_2-_968_299",
+            "324180590_assisting_167_453",
+            "13044_TaShawn_Thomas_PicknRoll_267003943",
+            "588771_Kenneth_Lofton_Jr__2p1_273744384",
+            "328294378_assisting_146_897",
+            "327536838_2-_363_671",
+            "327231943_accurate_pass_538_536",
+            "324456753_accurate_pass_16_037",
+            "324137453_foul_247_025",
+            "364_Grigory_Motovilov_3-_264697795"
+        ];
+
+        const soccerSamples = [
+            "touch_2091915015",
+            "pass_2038347594",
+            "corner_1656639790",
+            "shot_1828810871",
+            "offside_1187501432",
+            "acceleration_2391999457",
+            "acceleration_2372483224",
+            "free_kick_2353271349",
+            "free_kick_2400488967",
+            "pass_1411952510"
+        ];
+
+        function getVideoPath(method, sport, filename) {
+            return `./task1_eval/${method}/${sport}/${filename}.mp4`;
+        }
+
+        function getRandomMethod() {
+            return competitorMethods[Math.floor(Math.random() * competitorMethods.length)];
+        }
+
+        function selectSamples() {
+            const basketballCount = 5;
+            const soccerCount = 5;
+            const selectedSamples = [];
+
+            const usedBasketball = new Set();
+            for (let i = 0; i < basketballCount; i++) {
+                let idx;
+                do {
+                    idx = Math.floor(Math.random() * basketballSamples.length);
+                } while (usedBasketball.has(idx));
+                usedBasketball.add(idx);
+                selectedSamples.push({ sport: "basketball", filename: basketballSamples[idx] });
+            }
+
+            const usedSoccer = new Set();
+            for (let i = 0; i < soccerCount; i++) {
+                let idx;
+                do {
+                    idx = Math.floor(Math.random() * soccerSamples.length);
+                } while (usedSoccer.has(idx));
+                usedSoccer.add(idx);
+                selectedSamples.push({ sport: "soccer", filename: soccerSamples[idx] });
+            }
+
+            // Shuffle
+            for (let i = selectedSamples.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [selectedSamples[i], selectedSamples[j]] = [selectedSamples[j], selectedSamples[i]];
+            }
+
+            return selectedSamples;
+        }
+
+        function createVideoPair(index, sample) {
+            const competitor = getRandomMethod();
+            const oursInA = Math.random() < 0.5;
+
+            pairInfo[index] = {
+                competitor: competitor,
+                sport: sample.sport,
+                filename: sample.filename,
+                oursInA: oursInA
+            };
+
+            const oursVideo = getVideoPath("ours", sample.sport, sample.filename);
+            const compVideo = getVideoPath(competitor, sample.sport, sample.filename);
+            const gtVideo = getVideoPath("gt", sample.sport, sample.filename);
+
+            const sportLabel = sample.sport.charAt(0).toUpperCase() + sample.sport.slice(1);
+
+            return `
+                <p class="pair-header">Pair ${index + 1} (${sportLabel})</p>
+                <div class="gt-video">
+                    <video width="480" height="360" controls preload="metadata">
+                        <source src="${gtVideo}" type="video/mp4">
+                    </video>
+                    <p class="gt-label">Ground Truth</p>
+                </div>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video width="480" height="360" controls preload="metadata">
+                            <source src="${oursInA ? oursVideo : compVideo}" type="video/mp4">
+                        </video>
+                        <p>Video A</p>
+                    </div>
+                    <div class="video-wrapper">
+                        <video width="480" height="360" controls preload="metadata">
+                            <source src="${oursInA ? compVideo : oursVideo}" type="video/mp4">
+                        </video>
+                        <p>Video B</p>
+                    </div>
+                </div>
+                <div class="questions">
+                    <p>Q${index + 1}-1: Which generated video has better overall visual quality?</p>
+                    <label><input type="radio" name="quality${index}" value="A" required> A is better</label>
+                    <label><input type="radio" name="quality${index}" value="equal"> About equal</label>
+                    <label><input type="radio" name="quality${index}" value="B" required> B is better</label><br>
+
+                    <p>Q${index + 1}-2: Which generated video better matches the motion/action in the ground truth?</p>
+                    <label><input type="radio" name="action${index}" value="A" required> A is better</label>
+                    <label><input type="radio" name="action${index}" value="equal"> About equal</label>
+                    <label><input type="radio" name="action${index}" value="B" required> B is better</label><br>
+                </div>
+            `;
+        }
+
+        function loadVideoPairs() {
+            const container = document.getElementById('video-pairs');
+            const selectedSamples = selectSamples();
+
+            for (let i = 0; i < totalPairs; i++) {
+                container.innerHTML += createVideoPair(i, selectedSamples[i]);
+            }
+        }
+
+        document.getElementById('evaluation-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const results = [];
+
+            for (let i = 0; i < totalPairs; i++) {
+                const qualityPick = formData.get(`quality${i}`);
+                const actionPick = formData.get(`action${i}`);
+                const info = pairInfo[i];
+
+                function resolveChoice(pick, oursInA) {
+                    if (pick === "equal") return "equal";
+                    if (pick === "A") return oursInA ? "ours" : info.competitor;
+                    return oursInA ? info.competitor : "ours";
+                }
+
+                results.push({
+                    pair: i + 1,
+                    sport: info.sport,
+                    filename: info.filename,
+                    competitor: info.competitor,
+                    quality_winner: resolveChoice(qualityPick, info.oursInA),
+                    action_winner: resolveChoice(actionPick, info.oursInA)
+                });
+            }
+
+            console.log("Evaluation Results:", JSON.stringify(results, null, 2));
+            alert("Results logged to console:\n" + JSON.stringify(results, null, 2));
+
+            document.getElementById('thank-you-modal').style.display = 'flex';
+        });
+
+        document.getElementById('close-btn').addEventListener('click', function() {
+            location.reload();
+        });
+
+        window.onload = loadVideoPairs;
+    </script>
+</body>
+</html>
