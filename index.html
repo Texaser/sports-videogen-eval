@@ -3,52 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 1: Video Generation Evaluation</title>
+    <title>Sports Video Generation Evaluation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 20px;
+            background-color: #fafafa;
         }
-        h1 {
-            text-align: center;
+        h1 { margin-bottom: 5px; }
+        .intro {
+            text-align: left;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px 30px;
+            margin: 20px auto 30px;
+            max-width: 900px;
+            line-height: 1.6;
+        }
+        .intro h2 { margin-top: 0; text-align: center; }
+        .intro ul { padding-left: 20px; }
+        .intro li { margin-bottom: 6px; }
+        .pair-section {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .pair-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .step-label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
         }
         .video-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .video-wrapper {
             text-align: center;
-            margin: 0 20px;
+            margin: 0 15px;
+        }
+        .video-wrapper p {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .gt-label {
+            color: #666;
+            font-style: italic;
+            font-weight: normal !important;
         }
         .questions {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #ccc;
+            margin: 15px 0;
         }
         .questions p {
-            margin: 10px 0;
-        }
-        .pair-header {
-            font-size: 18px;
+            margin: 10px 0 5px;
             font-weight: bold;
-            color: #333;
-            margin-top: 30px;
+        }
+        .questions label {
+            margin: 0 10px;
         }
         .modal {
             display: none;
             position: fixed;
             z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0,0,0,0.5);
             justify-content: center;
             align-items: center;
         }
@@ -60,15 +96,7 @@
             max-width: 500px;
             margin: auto;
         }
-        .close-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button[type="submit"] {
+        .close-btn, button[type="submit"] {
             background-color: #4CAF50;
             color: white;
             padding: 12px 30px;
@@ -78,27 +106,29 @@
             font-size: 16px;
             margin-top: 20px;
         }
-        button[type="submit"]:hover {
+        button[type="submit"]:hover, .close-btn:hover {
             background-color: #45a049;
-        }
-        .gt-video {
-            margin-bottom: 15px;
-        }
-        .gt-label {
-            color: #666;
-            font-style: italic;
         }
     </style>
 </head>
 <body>
-    <h1>Task 1: Video Generation Evaluation</h1>
-    <p style="font-size: 16px; color: #555;">
-        For each example, you will see a <b>Ground Truth</b> video and two generated videos (A and B).<br>
-        Please compare the two generated videos and answer the questions below.
-    </p>
-    <p style="font-size: 14px; color: #d9534f; font-weight: bold;">
-        Please watch all videos carefully before answering.
-    </p>
+    <h1>Sports Video Generation Evaluation</h1>
+
+    <div class="intro">
+        <h2>Instructions</h2>
+        <p>Thank you for participating in this evaluation! We are comparing different methods for <b>controllable sports video generation</b>. Given a ground truth sports video (basketball or soccer), each method generates a new video based on specified <b>player bounding box trajectories</b> (motion paths).</p>
+        <p>For each example, you will evaluate two anonymous models (Model A and Model B) in two aspects:</p>
+        <ul>
+            <li><b>Step 1 — Motion Trajectory Following:</b> You will see generated videos with <b>bounding boxes overlaid</b>. These boxes represent the <em>target trajectories</em> that the generated players should follow. Please judge which model's players better follow the given trajectories.</li>
+            <li><b>Step 2 — Visual Quality:</b> You will see the same generated videos <b>without bounding boxes</b>. Please judge:
+                <ul>
+                    <li><b>Player Appearance:</b> Which model generates more realistic and consistent-looking players?</li>
+                    <li><b>Overall Quality:</b> Which video has better overall visual quality (sharpness, realism, coherence)?</li>
+                </ul>
+            </li>
+        </ul>
+        <p>The <b>Ground Truth</b> video is shown as a reference for the original scene. Please watch all videos carefully before answering.</p>
+    </div>
 
     <form id="evaluation-form">
         <div id="video-pairs"></div>
@@ -114,14 +144,9 @@
 
     <script>
         const competitorMethods = ["ati", "magicmotion"];
-        const totalPairs = 10;
+        const totalPairs = 20;
 
-        let pairInfo = Array(totalPairs).fill(null).map(() => ({
-            competitor: "",
-            sport: "",
-            filename: "",
-            oursInA: false
-        }));
+        let pairInfo = [];
 
         const basketballSamples = [
             "343836663_2-_968_299",
@@ -157,38 +182,20 @@
             return competitorMethods[Math.floor(Math.random() * competitorMethods.length)];
         }
 
-        function selectSamples() {
-            const basketballCount = 5;
-            const soccerCount = 5;
-            const selectedSamples = [];
-
-            const usedBasketball = new Set();
-            for (let i = 0; i < basketballCount; i++) {
-                let idx;
-                do {
-                    idx = Math.floor(Math.random() * basketballSamples.length);
-                } while (usedBasketball.has(idx));
-                usedBasketball.add(idx);
-                selectedSamples.push({ sport: "basketball", filename: basketballSamples[idx] });
+        function buildAllSamples() {
+            const samples = [];
+            for (const f of basketballSamples) {
+                samples.push({ sport: "basketball", filename: f });
             }
-
-            const usedSoccer = new Set();
-            for (let i = 0; i < soccerCount; i++) {
-                let idx;
-                do {
-                    idx = Math.floor(Math.random() * soccerSamples.length);
-                } while (usedSoccer.has(idx));
-                usedSoccer.add(idx);
-                selectedSamples.push({ sport: "soccer", filename: soccerSamples[idx] });
+            for (const f of soccerSamples) {
+                samples.push({ sport: "soccer", filename: f });
             }
-
             // Shuffle
-            for (let i = selectedSamples.length - 1; i > 0; i--) {
+            for (let i = samples.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [selectedSamples[i], selectedSamples[j]] = [selectedSamples[j], selectedSamples[i]];
+                [samples[i], samples[j]] = [samples[j], samples[i]];
             }
-
-            return selectedSamples;
+            return samples;
         }
 
         function createVideoPair(index, sample) {
@@ -202,54 +209,98 @@
                 oursInA: oursInA
             };
 
-            const oursVideo = getVideoPath("ours", sample.sport, sample.filename);
-            const compVideo = getVideoPath(competitor, sample.sport, sample.filename);
+            const info = pairInfo[index];
             const gtVideo = getVideoPath("gt", sample.sport, sample.filename);
+
+            // Bbox videos
+            const oursBbox = getVideoPath("ours_bbox", sample.sport, sample.filename);
+            const compBbox = getVideoPath(competitor + "_bbox", sample.sport, sample.filename);
+            const videoA_bbox = oursInA ? oursBbox : compBbox;
+            const videoB_bbox = oursInA ? compBbox : oursBbox;
+
+            // No-bbox videos
+            const oursClean = getVideoPath("ours", sample.sport, sample.filename);
+            const compClean = getVideoPath(competitor, sample.sport, sample.filename);
+            const videoA_clean = oursInA ? oursClean : compClean;
+            const videoB_clean = oursInA ? compClean : oursClean;
 
             const sportLabel = sample.sport.charAt(0).toUpperCase() + sample.sport.slice(1);
 
             return `
-                <p class="pair-header">Pair ${index + 1} (${sportLabel})</p>
-                <div class="gt-video">
-                    <video width="480" height="360" controls preload="metadata">
-                        <source src="${gtVideo}" type="video/mp4">
-                    </video>
-                    <p class="gt-label">Ground Truth</p>
-                </div>
+            <div class="pair-section">
+                <p class="pair-header">Example ${index + 1} / ${totalPairs} (${sportLabel})</p>
+
+                <!-- Ground Truth -->
+                <p class="step-label">Ground Truth</p>
                 <div class="video-container">
                     <div class="video-wrapper">
-                        <video width="480" height="360" controls preload="metadata">
-                            <source src="${oursInA ? oursVideo : compVideo}" type="video/mp4">
+                        <video width="480" height="270" controls preload="metadata">
+                            <source src="${gtVideo}" type="video/mp4">
                         </video>
-                        <p>Video A</p>
+                        <p class="gt-label">Original video for reference</p>
+                    </div>
+                </div>
+
+                <!-- Step 1: Bbox videos for trajectory evaluation -->
+                <p class="step-label">Step 1: Motion Trajectory Following (with bounding boxes)</p>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video width="480" height="270" controls preload="metadata">
+                            <source src="${videoA_bbox}" type="video/mp4">
+                        </video>
+                        <p>Model A</p>
                     </div>
                     <div class="video-wrapper">
-                        <video width="480" height="360" controls preload="metadata">
-                            <source src="${oursInA ? compVideo : oursVideo}" type="video/mp4">
+                        <video width="480" height="270" controls preload="metadata">
+                            <source src="${videoB_bbox}" type="video/mp4">
                         </video>
-                        <p>Video B</p>
+                        <p>Model B</p>
                     </div>
                 </div>
                 <div class="questions">
-                    <p>Q${index + 1}-1: Which generated video has better overall visual quality?</p>
-                    <label><input type="radio" name="quality${index}" value="A" required> A is better</label>
-                    <label><input type="radio" name="quality${index}" value="equal"> About equal</label>
-                    <label><input type="radio" name="quality${index}" value="B" required> B is better</label><br>
-
-                    <p>Q${index + 1}-2: Which generated video better matches the motion/action in the ground truth?</p>
-                    <label><input type="radio" name="action${index}" value="A" required> A is better</label>
-                    <label><input type="radio" name="action${index}" value="equal"> About equal</label>
-                    <label><input type="radio" name="action${index}" value="B" required> B is better</label><br>
+                    <p>Which model's players better follow the target motion trajectories (bounding boxes)?</p>
+                    <label><input type="radio" name="trajectory${index}" value="A" required> Model A</label>
+                    <label><input type="radio" name="trajectory${index}" value="equal"> About equal</label>
+                    <label><input type="radio" name="trajectory${index}" value="B"> Model B</label>
                 </div>
+
+                <!-- Step 2: Clean videos for appearance & quality -->
+                <p class="step-label">Step 2: Visual Quality (without bounding boxes)</p>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video width="480" height="270" controls preload="metadata">
+                            <source src="${videoA_clean}" type="video/mp4">
+                        </video>
+                        <p>Model A</p>
+                    </div>
+                    <div class="video-wrapper">
+                        <video width="480" height="270" controls preload="metadata">
+                            <source src="${videoB_clean}" type="video/mp4">
+                        </video>
+                        <p>Model B</p>
+                    </div>
+                </div>
+                <div class="questions">
+                    <p>Which model generates more realistic player appearance?</p>
+                    <label><input type="radio" name="appearance${index}" value="A" required> Model A</label>
+                    <label><input type="radio" name="appearance${index}" value="equal"> About equal</label>
+                    <label><input type="radio" name="appearance${index}" value="B"> Model B</label>
+                    <br><br>
+                    <p>Which video has better overall visual quality?</p>
+                    <label><input type="radio" name="quality${index}" value="A" required> Model A</label>
+                    <label><input type="radio" name="quality${index}" value="equal"> About equal</label>
+                    <label><input type="radio" name="quality${index}" value="B"> Model B</label>
+                </div>
+            </div>
             `;
         }
 
         function loadVideoPairs() {
             const container = document.getElementById('video-pairs');
-            const selectedSamples = selectSamples();
+            const samples = buildAllSamples();
 
             for (let i = 0; i < totalPairs; i++) {
-                container.innerHTML += createVideoPair(i, selectedSamples[i]);
+                container.innerHTML += createVideoPair(i, samples[i]);
             }
         }
 
@@ -260,14 +311,12 @@
             const results = [];
 
             for (let i = 0; i < totalPairs; i++) {
-                const qualityPick = formData.get(`quality${i}`);
-                const actionPick = formData.get(`action${i}`);
                 const info = pairInfo[i];
 
-                function resolveChoice(pick, oursInA) {
+                function resolveChoice(pick) {
                     if (pick === "equal") return "equal";
-                    if (pick === "A") return oursInA ? "ours" : info.competitor;
-                    return oursInA ? info.competitor : "ours";
+                    if (pick === "A") return info.oursInA ? "ours" : info.competitor;
+                    return info.oursInA ? info.competitor : "ours";
                 }
 
                 results.push({
@@ -275,14 +324,14 @@
                     sport: info.sport,
                     filename: info.filename,
                     competitor: info.competitor,
-                    quality_winner: resolveChoice(qualityPick, info.oursInA),
-                    action_winner: resolveChoice(actionPick, info.oursInA)
+                    trajectory_winner: resolveChoice(formData.get(`trajectory${i}`)),
+                    appearance_winner: resolveChoice(formData.get(`appearance${i}`)),
+                    quality_winner: resolveChoice(formData.get(`quality${i}`))
                 });
             }
 
             console.log("Evaluation Results:", JSON.stringify(results, null, 2));
             alert("Results logged to console:\n" + JSON.stringify(results, null, 2));
-
             document.getElementById('thank-you-modal').style.display = 'flex';
         });
 
