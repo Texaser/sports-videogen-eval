@@ -158,18 +158,18 @@
 
     <div class="intro" id="intro-section">
         <h2>Instructions</h2>
-        <p>Thank you for participating in this evaluation! We are comparing different methods for <b>controllable sports video generation</b>. Given a ground truth sports video (basketball or soccer), each method generates a new video based on specified <b>player bounding box trajectories</b> (motion paths).</p>
+        <p>Thank you for participating in this evaluation! We are comparing different methods for <b>motion-conditioned sports video generation</b>. Given a ground truth sports video (basketball or soccer), each method generates a new video based on specified <b>player bounding box trajectories</b> (motion paths).</p>
         <p>For each example, you will evaluate two anonymous models (Model A and Model B) in two aspects:</p>
         <ul>
-            <li><b>Step 1 — Motion Trajectory Following:</b> You will see generated videos with <b>bounding boxes overlaid</b>. These boxes represent the <em>target trajectories</em> that the generated players should follow. Please judge which model's players better follow the given trajectories.</li>
+            <li><b>Step 1 — Motion Trajectory Following:</b> You will see generated videos with <b>bounding boxes overlaid</b>. These boxes represent the <em>target player trajectories</em> that the generated players should follow. Please judge which model's players better follow the given trajectories.</li>
             <li><b>Step 2 — Visual Quality:</b> You will see the same generated videos <b>without bounding boxes</b>. Please judge:
                 <ul>
-                    <li><b>Player Appearance:</b> Which model generates more realistic and consistent-looking players?</li>
-                    <li><b>Overall Quality:</b> Which video has better overall visual quality (sharpness, realism, coherence)?</li>
+                    <li><b>Player Appearance:</b> Which model generates more realistic and consistent player appearances?</li>
+                    <li><b>Overall Quality:</b> Which video has better overall visual quality (sharpness, realism, and temporal coherence)?</li>
                 </ul>
             </li>
         </ul>
-        <p>The <b>Ground Truth</b> video is shown as a reference for the original scene. Please watch all videos carefully before answering.</p>
+        <p>The <b>Ground Truth</b> video is provided as a reference for the original scene and player movements. Please watch all videos carefully before answering.</p>
     </div>
 
     <form id="evaluation-form">
