@@ -178,9 +178,9 @@
         <div style="background:#e8f5e9; border-left:4px solid #4CAF50; padding:12px 16px; margin:12px 0; border-radius:4px;">
             <b style="color:#2e7d32; font-size:15px;">Step 1 — Motion Trajectory Following</b><br>
             You will see two AI-generated videos (Model A and Model B), each with <b style="color:#d9534f;">colored rectangles</b> drawn on them. Each rectangle represents a <b>target position</b> — it shows <em>where the AI was told to place a player</em> at that moment.<br><br>
-            <b>What to look for:</b> Do the <b>generated players</b> actually appear <em>inside</em> or <em>close to</em> these colored rectangles? <br>
-            <span style="color:#2e7d32;">A good model:</span> players closely follow the rectangles throughout the video.<br>
-            <span style="color:#d9534f;">A bad model:</span> players drift away from the rectangles, appear in wrong positions, or are missing entirely.
+            <b>What to look for:</b> Do the <b>generated players</b> actually appear <em>inside</em> or <em>close to</em> these colored rectangles? Also, <b>players should only appear where there are rectangles</b> — if a player appears in an area with no rectangle, that is a mistake. (Referees/officials are an exception and can be ignored.)<br>
+            <span style="color:#2e7d32;">A good model:</span> players closely follow the rectangles throughout the video, and no extra players appear outside the rectangles.<br>
+            <span style="color:#d9534f;">A bad model:</span> players drift away from the rectangles, appear in wrong positions, are missing entirely, or extra players appear where there are no rectangles.
         </div>
 
         <div style="background:#e3f2fd; border-left:4px solid #2196F3; padding:12px 16px; margin:12px 0; border-radius:4px;">
@@ -353,7 +353,7 @@
                     </div>
                 </div>
                 <div class="questions">
-                    <p>In which video do the generated players better stay inside or close to the colored rectangles throughout the video?</p>
+                    <p>In which video do the generated players better stay inside or close to the colored rectangles, with no extra players appearing outside the rectangles? (Referees can be ignored.)</p>
                     <label><input type="radio" name="trajectory" value="A" ${checked('trajectory','A')}> Model A</label>
                     <label><input type="radio" name="trajectory" value="equal" ${checked('trajectory','equal')}> About equal</label>
                     <label><input type="radio" name="trajectory" value="B" ${checked('trajectory','B')}> Model B</label>
