@@ -85,6 +85,26 @@
         .questions label {
             margin: 0 10px;
         }
+        .instruction-box {
+            background: #f3e5f5;
+            border: 2px solid #9c27b0;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 15px auto;
+            max-width: 900px;
+            text-align: left;
+        }
+        .instruction-box .instruction-text {
+            font-size: 16px;
+            color: #4a148c;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+        .instruction-box .player-info {
+            font-size: 14px;
+            color: #555;
+            margin: 4px 0;
+        }
         .nav-bar {
             display: flex;
             justify-content: center;
@@ -168,36 +188,51 @@
         <h2>Instructions — Please Read Carefully</h2>
 
         <h3>What is this about?</h3>
-        <p>We are evaluating AI models that <b>generate basketball videos</b>. Each model receives a set of instructions describing <em>where players should move</em> on the court, and then generates a video trying to follow those instructions. Your job is to compare two models and tell us which one does a better job.</p>
+        <p>We are evaluating AI models that <b>generate basketball videos based on a text instruction</b>. Each model is given a written description of what should happen in the video — for example, <em>"Player #10 performs a pick and roll"</em> or <em>"Defender #5 forces a missed shot"</em>. The model then tries to generate a video that matches this description.</p>
+        <p>Your job is to compare two models and tell us which one better follows the instruction.</p>
+
+        <h3>How is this different from Task 1?</h3>
+        <div style="background:#e8eaf6; border-left:4px solid #3f51b5; padding:12px 16px; margin:12px 0; border-radius:4px;">
+            <b>Task 1</b> asked: <em>Do the players follow the movement paths?</em> (trajectory following)<br>
+            <b>Task 2</b> asks: <em>Does the video match the text instruction?</em> (instruction following)<br><br>
+            In Task 2, you will read an instruction describing <b>what action should happen</b> and <b>which player should do it</b>, then judge whether each model's video actually shows that action happening correctly.
+        </div>
 
         <h3>What will you see?</h3>
-        <p>For each example, you will see a <b>Ground Truth video</b> and evaluate two AI-generated videos across <b>3 steps</b>:</p>
+        <p>For each example, you will see:</p>
 
-        <p><b>Ground Truth Video</b> — This is the <em>real, original</em> video of the sports scene. The player trajectories are extracted from this video, and the generated videos are expected to follow these trajectories, but are <b>not</b> required to look exactly the same as the ground truth video. It is provided for <b>scene context only</b>.</p>
+        <p><b>Ground Truth Video</b> — The real video that the instruction was based on. It is provided for <b>context only</b> — the generated videos are <b>not</b> required to look exactly the same.</p>
+
+        <p><b>Text Instruction</b> — A written description of what the AI was told to generate. Read this carefully before watching the generated videos.</p>
 
         <div style="background:#e8f5e9; border-left:4px solid #4CAF50; padding:12px 16px; margin:12px 0; border-radius:4px;">
-            <b style="color:#2e7d32; font-size:15px;">Step 1 — Motion Trajectory Following</b><br>
-            You will see two AI-generated videos (Model A and Model B), each with <b style="color:#d9534f;">colored rectangles</b> drawn on them. Each rectangle represents a <b>target position</b> — it shows <em>where the AI was told to place a player</em> at that moment.<br><br>
-            <b>What to look for:</b> Do the <b>generated players</b> actually appear <em>inside</em> or <em>close to</em> these colored rectangles? <br>
-            <span style="color:#2e7d32;">A good model:</span> players closely follow the rectangles throughout the video.<br>
-            <span style="color:#d9534f;">A bad model:</span> players drift away from the rectangles, appear in wrong positions, or are missing entirely.
+            <b style="color:#2e7d32; font-size:15px;">Step 1 — Target Player Positioning</b><br>
+            You will see two AI-generated videos (Model A and Model B) with <b style="color:#d9534f;">colored rectangles</b> drawn on them. These rectangles show <b>where the target player should end up</b> by the end of the video.<br><br>
+            <b>What to look for:</b> Does the <b>target player</b> (identified by jersey number in the instruction) move to the correct position? Is the player near the target rectangle at the end of the video?<br>
+            <span style="color:#2e7d32;">A good model:</span> the target player ends up at or near the specified position.<br>
+            <span style="color:#d9534f;">A bad model:</span> the player is far from the target position, or the wrong player moves there.
         </div>
 
         <div style="background:#e3f2fd; border-left:4px solid #2196F3; padding:12px 16px; margin:12px 0; border-radius:4px;">
-            <b style="color:#1565c0; font-size:15px;">Step 2 — Player Appearance</b><br>
-            You will see the same two AI-generated videos, but now <em>without</em> the colored rectangles, so you can focus on how the players look.<br><br>
-            <b>What to look for:</b> Do the <b>generated players</b> look like <b>real people</b>? Are their bodies, clothing, and movements realistic and consistent (e.g., no identity switching or distortion)? Or are they blurry, distorted, or flickering?
+            <b style="color:#1565c0; font-size:15px;">Step 2 — Action Correctness</b><br>
+            You will see the same two generated videos <em>without</em> the colored rectangles. Now focus on <b>whether the action described in the instruction actually happens in the video</b>.<br><br>
+            <b>What to look for:</b><br>
+            - Is the <b>correct player</b> performing the action (check the jersey number)?<br>
+            - Does the action <b>match the instruction</b>? For example: if the instruction says "rebound", does the player grab the ball after a missed shot? If it says "foul", is there a foul-like contact? If it says "pick and roll", does the player set a screen and roll?<br>
+            - Does the <b>outcome</b> match? For example, "missed shot" should show a miss, not a made basket.<br><br>
+            <span style="color:#1565c0;">You do <b>not</b> need basketball expertise</span> — just check whether what you see in the video reasonably matches what the instruction describes. Use common sense.
         </div>
 
         <div style="background:#fff3e0; border-left:4px solid #FF9800; padding:12px 16px; margin:12px 0; border-radius:4px;">
             <b style="color:#e65100; font-size:15px;">Step 3 — Overall Quality</b><br>
-            Considering <b>everything</b> you observed in Step 1 and Step 2, which model produces the better video overall?<br><br>
-            <b>Think about:</b> Does the video look <b>sharp and clear</b>? Does the scene (court, background) look realistic? Does the video flow <b>smoothly</b> without sudden jumps or glitches? Combined with how well players follow trajectories and how realistic they look — which model is better <b>overall</b>?
+            Considering <b>everything</b> — player positioning (Step 1), action correctness (Step 2), and general video quality — which model produces the better video overall?<br><br>
+            <b>Think about:</b> Does the video look <b>sharp and realistic</b>? Do players look like real people (not blurry or distorted)? Does the video flow <b>smoothly</b>? Combined with how well the video follows the instruction — which model is better <b>overall</b>?
         </div>
 
         <h3>Tips</h3>
         <ul>
-            <li>You do <b>not</b> need any sports knowledge — just compare what you see.</li>
+            <li>You do <b>not</b> need basketball expertise — just compare what you see against the written instruction.</li>
+            <li>Read the <b>instruction carefully</b> before watching the videos.</li>
             <li>If both models look equally good (or equally bad), you can select <b>"About equal"</b>.</li>
             <li>There are <b>14 examples</b> in total. You can go back to change your answers using the "Previous" button.</li>
             <li>Examples are <b>randomly sampled</b> and not cherry-picked.</li>
@@ -232,12 +267,13 @@
         let currentIndex = 0;
 
         let answers = Array(totalPairs).fill(null).map(() => ({
-            trajectory: null,
-            appearance: null,
+            positioning: null,
+            action: null,
             quality: null
         }));
 
         let pairInfo = [];
+        let captions = {};
 
         const sampleList = [
             "1037_Nigel_Williams-Goss_Foul_288466326",
@@ -266,7 +302,24 @@
             return competitorMethods[Math.floor(Math.random() * competitorMethods.length)];
         }
 
-        function initSamples() {
+        function formatPlayerSpecs(specs) {
+            if (!specs || specs.length === 0) return '';
+            return specs.map(p => {
+                let desc = `<b>Player ${p.jersey_number}</b>`;
+                if (p.action) desc += ` — Action: <em>${p.action}</em>`;
+                return desc;
+            }).join('<br>');
+        }
+
+        async function initSamples() {
+            // Load captions
+            try {
+                const resp = await fetch('./task2_eval/captions.json');
+                captions = await resp.json();
+            } catch (e) {
+                console.error('Failed to load captions:', e);
+            }
+
             allSamples = sampleList.map(f => ({ filename: f }));
             // Shuffle
             for (let i = allSamples.length - 1; i > 0; i--) {
@@ -281,6 +334,8 @@
                     oursInA: Math.random() < 0.5
                 };
             }
+
+            renderPair(0);
         }
 
         function renderPair(index) {
@@ -289,6 +344,10 @@
             const info = pairInfo[index];
             const oursInA = info.oursInA;
             const competitor = info.competitor;
+
+            const caption = captions[sample.filename] || {};
+            const instruction = caption.instruction || 'Instruction not available';
+            const playerSpecs = formatPlayerSpecs(caption.player_specifications);
 
             const gtVideo = getVideoPath("gt", sample.filename);
             const oursBbox = getVideoPath("ours_bbox", sample.filename);
@@ -311,17 +370,23 @@
             <div class="pair-section">
                 <p class="pair-header">Example ${index + 1} / ${totalPairs}</p>
 
+                <div class="instruction-box">
+                    <b style="font-size:15px; color:#7b1fa2;">Instruction given to the AI:</b>
+                    <p class="instruction-text">"${instruction}"</p>
+                    ${playerSpecs ? '<p class="player-info"><b>Target player(s):</b><br>' + playerSpecs + '</p>' : ''}
+                </div>
+
                 <p class="step-label">Ground Truth (Real Video)</p>
                 <div style="display:flex; justify-content:center; margin-bottom:10px;">
                     <div style="text-align:center; width:480px;">
                         <video width="480" controls preload="metadata" style="display:block; width:100%; height:auto;">
                             <source src="${gtVideo}" type="video/mp4">
                         </video>
-                        <p class="gt-label">Real video for scene context — generated videos do not need to look exactly the same.</p>
+                        <p class="gt-label">Real video for context — generated videos do not need to look exactly the same.</p>
                     </div>
                 </div>
 
-                <p class="step-label">Step 1: Do the players follow the target positions? (colored rectangles = where players should be)</p>
+                <p class="step-label">Step 1: Does the target player reach the correct position? (colored rectangles = target final position)</p>
                 <div class="video-container">
                     <div class="video-wrapper">
                         <video width="480" controls preload="metadata">
@@ -337,13 +402,13 @@
                     </div>
                 </div>
                 <div class="questions">
-                    <p>In which video do the generated players better stay inside or close to the colored rectangles throughout the video?</p>
-                    <label><input type="radio" name="trajectory" value="A" ${checked('trajectory','A')}> Model A</label>
-                    <label><input type="radio" name="trajectory" value="equal" ${checked('trajectory','equal')}> About equal</label>
-                    <label><input type="radio" name="trajectory" value="B" ${checked('trajectory','B')}> Model B</label>
+                    <p>In which video does the target player (see jersey number above) better reach the correct final position shown by the colored rectangles?</p>
+                    <label><input type="radio" name="positioning" value="A" ${checked('positioning','A')}> Model A</label>
+                    <label><input type="radio" name="positioning" value="equal" ${checked('positioning','equal')}> About equal</label>
+                    <label><input type="radio" name="positioning" value="B" ${checked('positioning','B')}> Model B</label>
                 </div>
 
-                <p class="step-label">Step 2: Which video looks better? (same videos, without rectangles)</p>
+                <p class="step-label">Step 2: Does the action match the instruction? (same videos, without rectangles)</p>
                 <div class="video-container">
                     <div class="video-wrapper">
                         <video width="480" controls preload="metadata">
@@ -359,15 +424,15 @@
                     </div>
                 </div>
                 <div class="questions">
-                    <p>In which video do the generated players look more like real people? (realistic body shape, clothing, and movement — not blurry or distorted)</p>
-                    <label><input type="radio" name="appearance" value="A" ${checked('appearance','A')}> Model A</label>
-                    <label><input type="radio" name="appearance" value="equal" ${checked('appearance','equal')}> About equal</label>
-                    <label><input type="radio" name="appearance" value="B" ${checked('appearance','B')}> Model B</label>
+                    <p>Re-read the instruction above. In which video does the action better match what the instruction describes? (correct player, correct action, correct outcome)</p>
+                    <label><input type="radio" name="action" value="A" ${checked('action','A')}> Model A</label>
+                    <label><input type="radio" name="action" value="equal" ${checked('action','equal')}> About equal</label>
+                    <label><input type="radio" name="action" value="B" ${checked('action','B')}> Model B</label>
                 </div>
 
                 <p class="step-label">Step 3: Considering everything above, which model is better overall?</p>
                 <div class="questions" style="margin-top: 5px;">
-                    <p>Taking into account <em>both</em> how well the generated players follow the target positions (Step 1) and the visual quality (Step 2), which model produces the better video overall?</p>
+                    <p>Taking into account player positioning (Step 1), action correctness (Step 2), and general video quality (sharpness, realism, smoothness), which model produces the better video overall?</p>
                     <label><input type="radio" name="quality" value="A" ${checked('quality','A')}> Model A</label>
                     <label><input type="radio" name="quality" value="equal" ${checked('quality','equal')}> About equal</label>
                     <label><input type="radio" name="quality" value="B" ${checked('quality','B')}> Model B</label>
@@ -375,7 +440,7 @@
             </div>
             `;
 
-            for (const qName of ['trajectory', 'appearance', 'quality']) {
+            for (const qName of ['positioning', 'action', 'quality']) {
                 document.querySelectorAll(`input[name="${qName}"]`).forEach(radio => {
                     radio.addEventListener('change', () => {
                         answers[currentIndex][qName] = radio.value;
@@ -398,7 +463,7 @@
 
         function currentAnswersComplete() {
             const a = answers[currentIndex];
-            return a.trajectory && a.appearance && a.quality;
+            return a.positioning && a.action && a.quality;
         }
 
         document.getElementById('next-btn').addEventListener('click', function() {
@@ -440,8 +505,8 @@
                     pair: i + 1,
                     filename: info.filename,
                     competitor: info.competitor,
-                    trajectory_winner: resolveChoice(a.trajectory),
-                    appearance_winner: resolveChoice(a.appearance),
+                    positioning_winner: resolveChoice(a.positioning),
+                    action_winner: resolveChoice(a.action),
                     quality_winner: resolveChoice(a.quality)
                 });
             }
@@ -457,7 +522,6 @@
 
         window.onload = function() {
             initSamples();
-            renderPair(0);
         };
     </script>
 </body>

@@ -1,0 +1,826 @@
+{
+  "1037_Nigel_Williams-Goss_Foul_288466326": {
+    "instruction": "Simulate Defender #1 defended a player who is performing foul.",
+    "player_specifications": [
+      {
+        "jersey_number": "#1",
+        "start_bbox": {
+          "x1": 0.731117,
+          "y1": 0.362045,
+          "x2": 0.783312,
+          "y2": 0.590172
+        },
+        "end_bbox": {
+          "x1": 0.568895,
+          "y1": 0.5067,
+          "x2": 0.664737,
+          "y2": 0.866575
+        },
+        "action": "Defend"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/31_Spain. Liga Endesa/1006053_Real Madrid - Unicaja Malaga.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/31_Spain. Liga Endesa/1037/1037_Nigel Williams-Goss_Foul_288466326_detections.json",
+    "category": "opponent_only",
+    "fully_valid_players": [
+      "opponent"
+    ],
+    "player_action": "Foul",
+    "teammate_action": null,
+    "caption": "Simulate Defender #1 defended a player who is performing foul.",
+    "player_bbox_start_frame": null,
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": [
+      0.731117,
+      0.362045,
+      0.783312,
+      0.590172
+    ],
+    "player_bbox_end_frame": null,
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": [
+      0.568895,
+      0.5067,
+      0.664737,
+      0.866575
+    ],
+    "refined_instruction": "Simulate Defender #1 draws a foul."
+  },
+  "1109_Edgaras_Ulanovas_2-_262040613": {
+    "instruction": "Simulate Player #92 executing 2 Pt Missed during a Pick'n'Roll from Low Post with a Floater using a Changing direction with the Left hand while contested and another player #8 executing rebound.",
+    "player_specifications": [
+      {
+        "jersey_number": "#92",
+        "start_bbox": {
+          "x1": 0.456489,
+          "y1": 0.633574,
+          "x2": 0.522072,
+          "y2": 0.901616
+        },
+        "end_bbox": {
+          "x1": 0.587153,
+          "y1": 0.493783,
+          "x2": 0.643731,
+          "y2": 0.743421
+        },
+        "action": "2-"
+      },
+      {
+        "jersey_number": "#8",
+        "start_bbox": {
+          "x1": 0.210322,
+          "y1": 0.432898,
+          "x2": 0.27208,
+          "y2": 0.637501
+        },
+        "end_bbox": {
+          "x1": 0.446654,
+          "y1": 0.496598,
+          "x2": 0.50815,
+          "y2": 0.706706
+        },
+        "action": "Rebound"
+      }
+    ],
+    "detail": {
+      "player": {
+        "position": "Low Post",
+        "shot_type": "Floater",
+        "dribble_move": "Changing direction",
+        "drive": null,
+        "hand": "Left",
+        "playtype": "Pick'n'Roll",
+        "contesting": "Contested"
+      },
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/2_Euroleague/996960_BC Zalgiris Kaunas - FC Bayern Munich.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/2_Euroleague/1109/1109_Edgaras Ulanovas_2-_262040613_detections.json",
+    "category": "player_teammate",
+    "fully_valid_players": [
+      "player",
+      "teammate"
+    ],
+    "player_action": "2-",
+    "teammate_action": "Rebound",
+    "caption": "Simulate Player #92 executing 2 Pt Missed during a Pick'n'Roll from Low Post with a Floater using a Changing direction with the Left hand while contested and another player #8 executing rebound.",
+    "player_bbox_start_frame": [
+      0.456489,
+      0.633574,
+      0.522072,
+      0.901616
+    ],
+    "teammate_bbox_start_frame": [
+      0.210322,
+      0.432898,
+      0.27208,
+      0.637501
+    ],
+    "opponent_bbox_start_frame": null,
+    "player_bbox_end_frame": [
+      0.587153,
+      0.493783,
+      0.643731,
+      0.743421
+    ],
+    "teammate_bbox_end_frame": [
+      0.446654,
+      0.496598,
+      0.50815,
+      0.706706
+    ],
+    "opponent_bbox_end_frame": null,
+    "refined_instruction": "Simulate Player #92 missing a 2-pointer during a Pick'n'Roll from the Low Post, performing a floater with a changing direction dribble using the left hand while contested, as Player #8 secures the rebound."
+  },
+  "1861_Cameron_Payne_Foul_254688547": {
+    "instruction": "Simulate Player #15 executing Foul.",
+    "player_specifications": [
+      {
+        "jersey_number": "#15",
+        "start_bbox": {
+          "x1": 0.48757,
+          "y1": 0.429726,
+          "x2": 0.538763,
+          "y2": 0.640074
+        },
+        "end_bbox": {
+          "x1": 0.255141,
+          "y1": 0.306428,
+          "x2": 0.310377,
+          "y2": 0.543688
+        },
+        "action": "Foul"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/3_NBA/998534_Phoenix Suns - Utah Jazz.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/3_NBA/1861/1861_Cameron Payne_Foul_254688547_detections.json",
+    "category": "player_only",
+    "fully_valid_players": [
+      "player"
+    ],
+    "player_action": "Foul",
+    "teammate_action": null,
+    "caption": "Simulate Player #15 executing Foul.",
+    "player_bbox_start_frame": [
+      0.48757,
+      0.429726,
+      0.538763,
+      0.640074
+    ],
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": [
+      0.650516,
+      0.479879,
+      0.742011,
+      0.696284
+    ],
+    "player_bbox_end_frame": [
+      0.255141,
+      0.306428,
+      0.310377,
+      0.543688
+    ],
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": null,
+    "refined_instruction": "Simulate Defender #15 draws a foul."
+  },
+  "1881_Marcus_Morris_Rebound_247840436": {
+    "instruction": "Simulate Player #8 executing Rebound.",
+    "player_specifications": [
+      {
+        "jersey_number": "#8",
+        "start_bbox": {
+          "x1": 0.6386,
+          "y1": 0.37509,
+          "x2": 0.685961,
+          "y2": 0.610594
+        },
+        "end_bbox": {
+          "x1": 0.470427,
+          "y1": 0.327536,
+          "x2": 0.549767,
+          "y2": 0.509932
+        },
+        "action": "Rebound"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/3_NBA/996933_Houston Rockets - Los Angeles Clippers.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/3_NBA/1881/1881_Marcus Morris_Rebound_247840436_detections.json",
+    "category": "player_only",
+    "fully_valid_players": [
+      "player"
+    ],
+    "player_action": "Rebound",
+    "teammate_action": null,
+    "caption": "Simulate Player #8 executing Rebound.",
+    "player_bbox_start_frame": [
+      0.6386,
+      0.37509,
+      0.685961,
+      0.610594
+    ],
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": null,
+    "player_bbox_end_frame": [
+      0.470427,
+      0.327536,
+      0.549767,
+      0.509932
+    ],
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": null,
+    "refined_instruction": "Simulate Player #8 securing a rebound."
+  },
+  "2904_Ivan_Majcunic_Foul_280822170": {
+    "instruction": "Simulate Defender #2 defended a player who is performing foul.",
+    "player_specifications": [
+      {
+        "jersey_number": "#2",
+        "start_bbox": {
+          "x1": -0.000258,
+          "y1": 0.51946,
+          "x2": 0.051396,
+          "y2": 0.795339
+        },
+        "end_bbox": {
+          "x1": 0.232939,
+          "y1": 0.284182,
+          "x2": 0.304042,
+          "y2": 0.557433
+        },
+        "action": "Defend"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/13_ABA League/961156_KK Cibona - KKZ Crvena Zvezda.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/13_ABA League/2904/2904_Ivan Majcunic_Foul_280822170_detections.json",
+    "category": "opponent_only",
+    "fully_valid_players": [
+      "opponent"
+    ],
+    "player_action": "Foul",
+    "teammate_action": null,
+    "caption": "Simulate Defender #2 defended a player who is performing foul.",
+    "player_bbox_start_frame": null,
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": [
+      -0.000258,
+      0.51946,
+      0.051396,
+      0.795339
+    ],
+    "player_bbox_end_frame": null,
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": [
+      0.232939,
+      0.284182,
+      0.304042,
+      0.557433
+    ],
+    "refined_instruction": "Simulate Defender #2 draws a foul."
+  },
+  "4735_Rolands_Smits_Foul_270755942": {
+    "instruction": "Simulate Defender #16 defended a player who is performing foul.",
+    "player_specifications": [
+      {
+        "jersey_number": "#16",
+        "start_bbox": {
+          "x1": 0.115639,
+          "y1": 0.61331,
+          "x2": 0.173738,
+          "y2": 0.875507
+        },
+        "end_bbox": {
+          "x1": 0.42973,
+          "y1": 0.554627,
+          "x2": 0.507726,
+          "y2": 0.778527
+        },
+        "action": "Defend"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/2_Euroleague/1004558_Panathinaikos Opap Athens - BC Zalgiris Kaunas.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/2_Euroleague/4735/4735_Rolands Smits_Foul_270755942_detections.json",
+    "category": "opponent_only",
+    "fully_valid_players": [
+      "opponent"
+    ],
+    "player_action": "Foul",
+    "teammate_action": null,
+    "caption": "Simulate Defender #16 defended a player who is performing foul.",
+    "player_bbox_start_frame": null,
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": [
+      0.115639,
+      0.61331,
+      0.173738,
+      0.875507
+    ],
+    "player_bbox_end_frame": null,
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": [
+      0.42973,
+      0.554627,
+      0.507726,
+      0.778527
+    ],
+    "refined_instruction": "Simulate Defender #16 draws a foul."
+  },
+  "476341_Charles_OBannon_Jr__3-_271451948": {
+    "instruction": "Simulate Player #5 executing 3 Pt Missed during a Catch and shoot from Corner with a Jumper using a Jab step with the Right hand while contested.",
+    "player_specifications": [
+      {
+        "jersey_number": "#5",
+        "start_bbox": {
+          "x1": 0.278544,
+          "y1": 0.592755,
+          "x2": 0.337972,
+          "y2": 0.82118
+        },
+        "end_bbox": {
+          "x1": 0.121085,
+          "y1": 0.59337,
+          "x2": 0.185733,
+          "y2": 0.843641
+        },
+        "action": "3-"
+      }
+    ],
+    "detail": {
+      "player": {
+        "position": "Corner",
+        "shot_type": "Jumper",
+        "dribble_move": "Jab step",
+        "drive": null,
+        "hand": "Right",
+        "playtype": "Catch and shoot",
+        "contesting": "Contested"
+      },
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/6_NCAA Division I/989126_Mississippi State - TCU.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/6_NCAA Division I/476341/476341_Charles O'Bannon Jr._3-_271451948_detections.json",
+    "category": "player_only",
+    "fully_valid_players": [
+      "player"
+    ],
+    "player_action": "3-",
+    "teammate_action": null,
+    "caption": "Simulate Player #5 executing 3 Pt Missed during a Catch and shoot from Corner with a Jumper using a Jab step with the Right hand while contested.",
+    "player_bbox_start_frame": [
+      0.278544,
+      0.592755,
+      0.337972,
+      0.82118
+    ],
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": null,
+    "player_bbox_end_frame": [
+      0.121085,
+      0.59337,
+      0.185733,
+      0.843641
+    ],
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": null,
+    "refined_instruction": "Simulate Player #5 executing a 3 PT Missed during a Catch and Shoot from the Corner with a Jumper, utilizing a Jab Step with the Right hand while Contested."
+  },
+  "531247_Keenan_Fitzmorris_2-_264466774": {
+    "instruction": "Simulate Defender #35 forced a missed restricted area post two under tight contest.",
+    "player_specifications": [
+      {
+        "jersey_number": "#35",
+        "start_bbox": {
+          "x1": 0.437261,
+          "y1": 0.271162,
+          "x2": 0.511796,
+          "y2": 0.500842
+        },
+        "end_bbox": {
+          "x1": 0.505969,
+          "y1": 0.362077,
+          "x2": 0.579637,
+          "y2": 0.592504
+        },
+        "action": "Defend"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/6_NCAA Division I/985570_Monmouth - Stony Brook.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/6_NCAA Division I/531247/531247_Keenan Fitzmorris_2-_264466774_detections.json",
+    "category": "opponent_only",
+    "fully_valid_players": [
+      "opponent"
+    ],
+    "player_action": "2-",
+    "teammate_action": null,
+    "caption": "Simulate Defender #35 forced a missed restricted area post two under tight contest.",
+    "player_bbox_start_frame": null,
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": [
+      0.437261,
+      0.271162,
+      0.511796,
+      0.500842
+    ],
+    "player_bbox_end_frame": null,
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": [
+      0.505969,
+      0.362077,
+      0.579637,
+      0.592504
+    ],
+    "refined_instruction": "Simulate Defender #35 contested a missed shot in the restricted area during a post play."
+  },
+  "6836_Anthony_Gill_2-_266421983": {
+    "instruction": "Simulate Defender #9 forced a missed restricted area isolation two under tight contest.",
+    "player_specifications": [
+      {
+        "jersey_number": "#9",
+        "start_bbox": {
+          "x1": 0.597164,
+          "y1": 0.198672,
+          "x2": 0.652812,
+          "y2": 0.451652
+        },
+        "end_bbox": {
+          "x1": 0.610682,
+          "y1": 0.383322,
+          "x2": 0.705779,
+          "y2": 0.715352
+        },
+        "action": "Defend"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/3_NBA/1003698_Washington Wizards - Chicago Bulls.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/3_NBA/6836/6836_Anthony Gill_2-_266421983_detections.json",
+    "category": "opponent_only",
+    "fully_valid_players": [
+      "opponent"
+    ],
+    "player_action": "2-",
+    "teammate_action": null,
+    "caption": "Simulate Defender #9 forced a missed restricted area isolation two under tight contest.",
+    "player_bbox_start_frame": null,
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": [
+      0.597164,
+      0.198672,
+      0.652812,
+      0.451652
+    ],
+    "player_bbox_end_frame": null,
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": [
+      0.610682,
+      0.383322,
+      0.705779,
+      0.715352
+    ],
+    "refined_instruction": "Simulate Defender #9 forces a missed 2 PT shot in the restricted area during an isolation play under tight contest."
+  },
+  "7858_Dante_Exum_Foul_255173111": {
+    "instruction": "Simulate Defender #20 defended a player who is performing foul.",
+    "player_specifications": [
+      {
+        "jersey_number": "#20",
+        "start_bbox": {
+          "x1": 0.416123,
+          "y1": 0.585401,
+          "x2": 0.498911,
+          "y2": 0.848966
+        },
+        "end_bbox": {
+          "x1": 0.536864,
+          "y1": 0.448067,
+          "x2": 0.599954,
+          "y2": 0.665705
+        },
+        "action": "Defend"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/13_ABA League/940427_KKZ Crvena Zvezda - KK Partizan Mozzart Bet.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/13_ABA League/7858/7858_Dante Exum_Foul_255173111_detections.json",
+    "category": "opponent_only",
+    "fully_valid_players": [
+      "opponent"
+    ],
+    "player_action": "Foul",
+    "teammate_action": null,
+    "caption": "Simulate Defender #20 defended a player who is performing foul.",
+    "player_bbox_start_frame": null,
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": [
+      0.416123,
+      0.585401,
+      0.498911,
+      0.848966
+    ],
+    "player_bbox_end_frame": null,
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": [
+      0.536864,
+      0.448067,
+      0.599954,
+      0.665705
+    ],
+    "refined_instruction": "Simulate Defender #20 draws a foul."
+  },
+  "8420_Eric_Bledsoe_2p_259154652": {
+    "instruction": "Simulate Player #10 executing Pick'N'Roll.",
+    "player_specifications": [
+      {
+        "jersey_number": "#10",
+        "start_bbox": {
+          "x1": 0.878027,
+          "y1": 0.419731,
+          "x2": 0.996693,
+          "y2": 0.708786
+        },
+        "end_bbox": {
+          "x1": 0.810982,
+          "y1": 0.416157,
+          "x2": 0.90794,
+          "y2": 0.781773
+        },
+        "action": "Pick'n'Roll"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/68_China. CBA/1004908_Shanghai Sharks - Ningbo Rockets.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/68_China. CBA/8420/8420_Eric Bledsoe_2+_259154652_detections.json",
+    "category": "teammate_only",
+    "fully_valid_players": [
+      "teammate"
+    ],
+    "player_action": "2+",
+    "teammate_action": "Pick'n'Roll",
+    "caption": "Simulate Player #10 executing Pick'N'Roll.",
+    "player_bbox_start_frame": null,
+    "teammate_bbox_start_frame": [
+      0.878027,
+      0.419731,
+      0.996693,
+      0.708786
+    ],
+    "opponent_bbox_start_frame": null,
+    "player_bbox_end_frame": null,
+    "teammate_bbox_end_frame": [
+      0.810982,
+      0.416157,
+      0.90794,
+      0.781773
+    ],
+    "opponent_bbox_end_frame": null,
+    "refined_instruction": "Simulate Player #10 executing a Pick'n'Roll."
+  },
+  "8488_Panagiotis_Kalaitzakis_3-_279719388": {
+    "instruction": "Simulate Player #0 executing 3 Pt Missed during a Screen off from Corner with a Jumper with the Right hand while contested and another player #6 executing screen, guarded by a defender #1.",
+    "player_specifications": [
+      {
+        "jersey_number": "#0",
+        "start_bbox": {
+          "x1": 0.804563,
+          "y1": 0.606216,
+          "x2": 0.884635,
+          "y2": 0.844694
+        },
+        "end_bbox": {
+          "x1": 0.870675,
+          "y1": 0.592632,
+          "x2": 0.934864,
+          "y2": 0.823725
+        },
+        "action": "3-"
+      },
+      {
+        "jersey_number": "#6",
+        "start_bbox": {
+          "x1": 0.717397,
+          "y1": 0.446856,
+          "x2": 0.774528,
+          "y2": 0.680028
+        },
+        "end_bbox": {
+          "x1": 0.525247,
+          "y1": 0.41081,
+          "x2": 0.59021,
+          "y2": 0.62473
+        },
+        "action": "Screen"
+      },
+      {
+        "jersey_number": "#1",
+        "start_bbox": {
+          "x1": 0.673491,
+          "y1": 0.49594,
+          "x2": 0.738301,
+          "y2": 0.697648
+        },
+        "end_bbox": {
+          "x1": 0.867805,
+          "y1": 0.649585,
+          "x2": 0.943038,
+          "y2": 0.883724
+        },
+        "action": "Defend"
+      }
+    ],
+    "detail": {
+      "player": {
+        "position": "Corner",
+        "shot_type": "Jumper",
+        "dribble_move": null,
+        "drive": null,
+        "hand": "Right",
+        "playtype": "Screen off",
+        "contesting": "Contested"
+      },
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/2_Euroleague/1004598_Panathinaikos Opap Athens - Anadolu Efes SK.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/2_Euroleague/8488/8488_Panagiotis Kalaitzakis_3-_279719388_detections.json",
+    "category": "player_teammate_opponent",
+    "fully_valid_players": [
+      "opponent",
+      "player",
+      "teammate"
+    ],
+    "player_action": "3-",
+    "teammate_action": "Screen",
+    "caption": "Simulate Player #0 executing 3 Pt Missed during a Screen off from Corner with a Jumper with the Right hand while contested and another player #6 executing screen, guarded by a defender #1.",
+    "player_bbox_start_frame": [
+      0.804563,
+      0.606216,
+      0.884635,
+      0.844694
+    ],
+    "teammate_bbox_start_frame": [
+      0.717397,
+      0.446856,
+      0.774528,
+      0.680028
+    ],
+    "opponent_bbox_start_frame": [
+      0.673491,
+      0.49594,
+      0.738301,
+      0.697648
+    ],
+    "player_bbox_end_frame": [
+      0.870675,
+      0.592632,
+      0.934864,
+      0.823725
+    ],
+    "teammate_bbox_end_frame": [
+      0.525247,
+      0.41081,
+      0.59021,
+      0.62473
+    ],
+    "opponent_bbox_end_frame": [
+      0.867805,
+      0.649585,
+      0.943038,
+      0.883724
+    ],
+    "refined_instruction": "Simulate Player #0 missing a 3-pointer during a Screen off from the Corner with a Jumper using the Right hand, while contested, as Player #6 sets the screen and is guarded by Defender #1."
+  },
+  "8810_Alessandro_Pajola_Rebound_245087411": {
+    "instruction": "Simulate Player #6 executing Rebound.",
+    "player_specifications": [
+      {
+        "jersey_number": "#6",
+        "start_bbox": {
+          "x1": 0.579241,
+          "y1": 0.693892,
+          "x2": 0.676177,
+          "y2": 0.959448
+        },
+        "end_bbox": {
+          "x1": 0.285611,
+          "y1": 0.415516,
+          "x2": 0.338855,
+          "y2": 0.675338
+        },
+        "action": "Rebound"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/2_Euroleague/938134_BC Zalgiris Kaunas - Virtus Bologna.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/2_Euroleague/8810/8810_Alessandro Pajola_Rebound_245087411_detections.json",
+    "category": "player_only",
+    "fully_valid_players": [
+      "player"
+    ],
+    "player_action": "Rebound",
+    "teammate_action": null,
+    "caption": "Simulate Player #6 executing Rebound.",
+    "player_bbox_start_frame": [
+      0.579241,
+      0.693892,
+      0.676177,
+      0.959448
+    ],
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": null,
+    "player_bbox_end_frame": [
+      0.285611,
+      0.415516,
+      0.338855,
+      0.675338
+    ],
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": null,
+    "refined_instruction": "Simulate Player #6 securing a Rebound."
+  },
+  "93143_Duop_Reath_2-_261350550": {
+    "instruction": "Simulate Defender #20 forced a missed low post post two under tight contest.",
+    "player_specifications": [
+      {
+        "jersey_number": "#20",
+        "start_bbox": {
+          "x1": 0.261319,
+          "y1": 0.448258,
+          "x2": 0.350384,
+          "y2": 0.70318
+        },
+        "end_bbox": {
+          "x1": 0.242255,
+          "y1": 0.509633,
+          "x2": 0.337834,
+          "y2": 0.910149
+        },
+        "action": "Defend"
+      }
+    ],
+    "detail": {
+      "player": null,
+      "teammate": null
+    },
+    "log_path": "/mnt/bum/hanyi/data/hq-basketball-dataset/game-logs/game_logs/22-23/68_China. CBA/1004932_Guangzhou Loong Lions - QingDao Eagles.csv",
+    "detection_path": "/mnt/bum/hanyi/data/jersey_basketball_22_23_season/68_China. CBA/93143/93143_Duop Reath_2-_261350550_detections.json",
+    "category": "opponent_only",
+    "fully_valid_players": [
+      "opponent"
+    ],
+    "player_action": "2-",
+    "teammate_action": null,
+    "caption": "Simulate Defender #20 forced a missed low post post two under tight contest.",
+    "player_bbox_start_frame": null,
+    "teammate_bbox_start_frame": null,
+    "opponent_bbox_start_frame": [
+      0.261319,
+      0.448258,
+      0.350384,
+      0.70318
+    ],
+    "player_bbox_end_frame": null,
+    "teammate_bbox_end_frame": null,
+    "opponent_bbox_end_frame": [
+      0.242255,
+      0.509633,
+      0.337834,
+      0.910149
+    ],
+    "refined_instruction": "Simulate Defender #20 forced a contested miss on a low post shot."
+  }
+}
