@@ -328,9 +328,9 @@
                 <p class="pair-header">Example ${index + 1} / ${totalPairs} (${sportLabel})</p>
 
                 <p class="step-label">Ground Truth (Real Video)</p>
-                <div class="video-container">
-                    <div class="video-wrapper">
-                        <video width="480" controls preload="metadata">
+                <div style="display:flex; justify-content:center; margin-bottom:10px;">
+                    <div style="text-align:center; width:480px;">
+                        <video width="480" controls preload="metadata" style="display:block; width:100%; height:auto;">
                             <source src="${gtVideo}" type="video/mp4">
                         </video>
                         <p class="gt-label">Real video for scene context — generated videos do not need to look exactly the same.</p>
