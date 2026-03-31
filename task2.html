@@ -188,15 +188,8 @@
         <h2>Instructions — Please Read Carefully</h2>
 
         <h3>What is this about?</h3>
-        <p>We are evaluating AI models that <b>generate basketball videos based on a text instruction</b>. Each model is given a written description of what should happen in the video — for example, <em>"Player #10 performs a pick and roll"</em> or <em>"Defender #5 forces a missed shot"</em>. The model then tries to generate a video that matches this description.</p>
+        <p>We are evaluating AI models that <b>generate basketball videos based on a text instruction</b>. Each model is given a written description of what should happen in the video — for example, <em>"Simulate Player #10 making a 2-point shot"</em> or <em>"Simulate Player #5 securing a rebound"</em>. The model then tries to generate a video that matches this description.</p>
         <p>Your job is to compare two models and tell us which one better follows the instruction.</p>
-
-        <h3>How is this different from Task 1?</h3>
-        <div style="background:#e8eaf6; border-left:4px solid #3f51b5; padding:12px 16px; margin:12px 0; border-radius:4px;">
-            <b>Task 1</b> asked: <em>Do the players follow the movement paths?</em> (trajectory following)<br>
-            <b>Task 2</b> asks: <em>Does the video match the text instruction?</em> (instruction following)<br><br>
-            In Task 2, you will read an instruction describing <b>what action should happen</b> and <b>which player should do it</b>, then judge whether each model's video actually shows that action happening correctly.
-        </div>
 
         <h3>What will you see?</h3>
         <p>For each example, you will see:</p>
@@ -207,10 +200,10 @@
 
         <div style="background:#e8f5e9; border-left:4px solid #4CAF50; padding:12px 16px; margin:12px 0; border-radius:4px;">
             <b style="color:#2e7d32; font-size:15px;">Step 1 — Target Player Positioning</b><br>
-            You will see two AI-generated videos (Model A and Model B) with <b style="color:#d9534f;">colored rectangles</b> drawn on them. These rectangles show <b>where the target player should end up</b> by the end of the video.<br><br>
-            <b>What to look for:</b> Does the <b>target player</b> (identified by jersey number in the instruction) move to the correct position? Is the player near the target rectangle at the end of the video?<br>
-            <span style="color:#2e7d32;">A good model:</span> the target player ends up at or near the specified position.<br>
-            <span style="color:#d9534f;">A bad model:</span> the player is far from the target position, or the wrong player moves there.
+            You will see two AI-generated videos (Model A and Model B) with <b style="color:#d9534f;">colored rectangles</b> drawn on them. The rectangle in the <b>first frame</b> indicates the <b>starting position</b> of the target player (identified by the jersey number in the instruction), and the rectangle in the <b>final frame</b> indicates the <b>target position</b> the player should reach by the end of the video.<br><br>
+            <b>What to look for:</b> Does the <b>target player</b> move from the starting position to the correct target location? Is the player near the target rectangle at the end of the video?<br>
+            <span style="color:#2e7d32;">A good model:</span> the target player ends up at or near the specified target position.<br>
+            <span style="color:#d9534f;">A bad model:</span> the player is far from the target position, or the wrong player moves to that location.
         </div>
 
         <div style="background:#e3f2fd; border-left:4px solid #2196F3; padding:12px 16px; margin:12px 0; border-radius:4px;">
