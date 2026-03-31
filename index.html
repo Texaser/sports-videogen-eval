@@ -163,21 +163,29 @@
         <p>We are evaluating AI models that <b>generate sports videos</b> (basketball and soccer). Each model receives a set of instructions describing <em>where players should move</em> on the field/court, and then generates a video trying to follow those instructions. Your job is to compare two models and tell us which one does a better job.</p>
 
         <h3>What will you see?</h3>
-        <p>For each example, you will see <b>three groups of videos</b>:</p>
-        <ol>
-            <li><b>Ground Truth Video</b> — This is the <em>real, original</em> video of the sports scene. The player trajectories are extracted from this video, and the generated videos are expected to follow these trajectories, but are <b>not</b> required to look exactly the same as the ground truth video. It is provided for scene context only.</li>
-            <li><b>Step 1 — Videos with colored rectangles (bounding boxes)</b><br>
-                You will see two AI-generated videos (Model A and Model B), each with <b>colored rectangles drawn around where players should be</b>. These rectangles show the <em>target positions</em> — i.e., where the AI was told to place the players at each moment.<br>
-                <span style="color:#d9534f;"><b>What to look for:</b></span> Do the generated players actually appear <em>inside</em> or <em>close to</em> the colored rectangles? A good model will have players that closely follow these rectangles throughout the video. A bad model will have players that drift away, appear in wrong positions, or are missing entirely.
-            </li>
-            <li><b>Step 2 — Videos without rectangles</b><br>
-                You will see the same two AI-generated videos, but now <em>without</em> the colored rectangles, so you can focus on visual quality. Here you will answer two questions:
-                <ul>
-                    <li><b>Player Appearance:</b> Do the players look like real people? Are their bodies, clothing, and movements realistic and consistent (not blurry, distorted, or flickering)?</li>
-                    <li><b>Overall Video Quality:</b> How does the entire video look? Is it sharp and clear? Does the scene (field, court, background) look realistic? Does the video flow smoothly without sudden jumps or glitches?</li>
-                </ul>
-            </li>
-        </ol>
+        <p>For each example, you will see a <b>Ground Truth video</b> and evaluate two AI-generated videos across <b>3 steps</b>:</p>
+
+        <p><b>Ground Truth Video</b> — This is the <em>real, original</em> video of the sports scene. The player trajectories are extracted from this video, and the generated videos are expected to follow these trajectories, but are <b>not</b> required to look exactly the same as the ground truth video. It is provided for <b>scene context only</b>.</p>
+
+        <div style="background:#e8f5e9; border-left:4px solid #4CAF50; padding:12px 16px; margin:12px 0; border-radius:4px;">
+            <b style="color:#2e7d32; font-size:15px;">Step 1 — Motion Trajectory Following</b><br>
+            You will see two AI-generated videos (Model A and Model B), each with <b style="color:#d9534f;">colored rectangles</b> drawn on them. Each rectangle represents a <b>target position</b> — it shows <em>where the AI was told to place a player</em> at that moment.<br><br>
+            <b>What to look for:</b> Do the <b>generated players</b> actually appear <em>inside</em> or <em>close to</em> these colored rectangles? <br>
+            <span style="color:#2e7d32;">A good model:</span> players closely follow the rectangles throughout the video.<br>
+            <span style="color:#d9534f;">A bad model:</span> players drift away from the rectangles, appear in wrong positions, or are missing entirely.
+        </div>
+
+        <div style="background:#e3f2fd; border-left:4px solid #2196F3; padding:12px 16px; margin:12px 0; border-radius:4px;">
+            <b style="color:#1565c0; font-size:15px;">Step 2 — Player Appearance</b><br>
+            You will see the same two AI-generated videos, but now <em>without</em> the colored rectangles, so you can focus on how the players look.<br><br>
+            <b>What to look for:</b> Do the <b>generated players</b> look like <b>real people</b>? Are their bodies, clothing, and movements realistic and consistent? Or are they blurry, distorted, or flickering?
+        </div>
+
+        <div style="background:#fff3e0; border-left:4px solid #FF9800; padding:12px 16px; margin:12px 0; border-radius:4px;">
+            <b style="color:#e65100; font-size:15px;">Step 3 — Overall Quality</b><br>
+            Considering <b>everything</b> you observed in Step 1 and Step 2, which model produces the better video overall?<br><br>
+            <b>Think about:</b> Does the video look <b>sharp and clear</b>? Does the scene (field, court, background) look realistic? Does the video flow <b>smoothly</b> without sudden jumps or glitches? Combined with how well players follow trajectories and how realistic they look — which model is better <b>overall</b>?
+        </div>
 
         <h3>Tips</h3>
         <ul>
