@@ -157,19 +157,35 @@
     <h1>Sports Video Generation Evaluation</h1>
 
     <div class="intro" id="intro-section">
-        <h2>Instructions</h2>
-        <p>Thank you for participating in this evaluation! We are comparing different methods for <b>motion-conditioned sports video generation</b>. Given a ground truth sports video (basketball or soccer), each method generates a new video based on specified <b>player bounding box trajectories</b> (motion paths).</p>
-        <p>For each example, you will evaluate two anonymous models (Model A and Model B) in two aspects:</p>
-        <ul>
-            <li><b>Step 1 — Motion Trajectory Following:</b> You will see generated videos with <b>bounding boxes overlaid</b>. These boxes represent the <em>target player trajectories</em> that the generated players should follow. Please judge which model's players better follow the given trajectories.</li>
-            <li><b>Step 2 — Visual Quality:</b> You will see the same generated videos <b>without bounding boxes</b>. Please judge:
+        <h2>Instructions — Please Read Carefully</h2>
+
+        <h3>What is this about?</h3>
+        <p>We are evaluating AI models that <b>generate sports videos</b> (basketball and soccer). Each model receives a set of instructions describing <em>where players should move</em> on the field/court, and then generates a video trying to follow those instructions. Your job is to compare two models and tell us which one does a better job.</p>
+
+        <h3>What will you see?</h3>
+        <p>For each example, you will see <b>three groups of videos</b>:</p>
+        <ol>
+            <li><b>Ground Truth Video</b> — This is the <em>real, original</em> video of the sports scene. Use it as a reference to understand what the scene should look like.</li>
+            <li><b>Step 1 — Videos with colored rectangles (bounding boxes)</b><br>
+                You will see two AI-generated videos (Model A and Model B), each with <b>colored rectangles drawn around where players should be</b>. These rectangles show the <em>target positions</em> — i.e., where the AI was told to place the players at each moment.<br>
+                <span style="color:#d9534f;"><b>What to look for:</b></span> Do the generated players actually appear <em>inside</em> or <em>close to</em> the colored rectangles? A good model will have players that closely follow these rectangles throughout the video. A bad model will have players that drift away, appear in wrong positions, or are missing entirely.
+            </li>
+            <li><b>Step 2 — Videos without rectangles</b><br>
+                You will see the same two AI-generated videos, but now <em>without</em> the colored rectangles, so you can focus on visual quality. Here you will answer two questions:
                 <ul>
-                    <li><b>Player Appearance:</b> Which model generates more realistic and consistent player appearances?</li>
-                    <li><b>Overall Quality:</b> Which video has better overall visual quality (sharpness, realism, and temporal coherence)?</li>
+                    <li><b>Player Appearance:</b> Do the players look like real people? Are their bodies, clothing, and movements realistic and consistent (not blurry, distorted, or flickering)?</li>
+                    <li><b>Overall Video Quality:</b> How does the entire video look? Is it sharp and clear? Does the scene (field, court, background) look realistic? Does the video flow smoothly without sudden jumps or glitches?</li>
                 </ul>
             </li>
+        </ol>
+
+        <h3>Tips</h3>
+        <ul>
+            <li>You do <b>not</b> need any sports knowledge — just compare what you see.</li>
+            <li>Please <b>watch each video fully</b> before answering.</li>
+            <li>If both models look equally good (or equally bad), you can select <b>"About equal"</b>.</li>
+            <li>There are <b>20 examples</b> in total. You can go back to change your answers using the "Previous" button.</li>
         </ul>
-        <p>The <b>Ground Truth</b> video is provided as a reference for the original scene and player movements. Please watch all videos carefully before answering.</p>
     </div>
 
     <form id="evaluation-form">
@@ -291,17 +307,17 @@
             <div class="pair-section">
                 <p class="pair-header">Example ${index + 1} / ${totalPairs} (${sportLabel})</p>
 
-                <p class="step-label">Ground Truth</p>
+                <p class="step-label">Ground Truth (Real Video)</p>
                 <div class="video-container">
                     <div class="video-wrapper">
                         <video width="480" height="270" controls preload="metadata">
                             <source src="${gtVideo}" type="video/mp4">
                         </video>
-                        <p class="gt-label">Original video for reference</p>
+                        <p class="gt-label">This is the real video — use it as a reference for what the scene should look like.</p>
                     </div>
                 </div>
 
-                <p class="step-label">Step 1: Motion Trajectory Following (with bounding boxes)</p>
+                <p class="step-label">Step 1: Do the players follow the target positions? (colored rectangles = where players should be)</p>
                 <div class="video-container">
                     <div class="video-wrapper">
                         <video width="480" height="270" controls preload="metadata">
@@ -317,13 +333,13 @@
                     </div>
                 </div>
                 <div class="questions">
-                    <p>Which model's players better follow the target motion trajectories (bounding boxes)?</p>
+                    <p>In which video do the players better stay inside or close to the colored rectangles throughout the video?</p>
                     <label><input type="radio" name="trajectory" value="A" ${checked('trajectory','A')}> Model A</label>
                     <label><input type="radio" name="trajectory" value="equal" ${checked('trajectory','equal')}> About equal</label>
                     <label><input type="radio" name="trajectory" value="B" ${checked('trajectory','B')}> Model B</label>
                 </div>
 
-                <p class="step-label">Step 2: Visual Quality (without bounding boxes)</p>
+                <p class="step-label">Step 2: Which video looks better? (same videos, without rectangles)</p>
                 <div class="video-container">
                     <div class="video-wrapper">
                         <video width="480" height="270" controls preload="metadata">
@@ -339,12 +355,12 @@
                     </div>
                 </div>
                 <div class="questions">
-                    <p>Which model generates more realistic player appearance?</p>
+                    <p>In which video do the players look more like real people? (realistic body shape, clothing, and movement — not blurry or distorted)</p>
                     <label><input type="radio" name="appearance" value="A" ${checked('appearance','A')}> Model A</label>
                     <label><input type="radio" name="appearance" value="equal" ${checked('appearance','equal')}> About equal</label>
                     <label><input type="radio" name="appearance" value="B" ${checked('appearance','B')}> Model B</label>
                     <br><br>
-                    <p>Which video has better overall visual quality?</p>
+                    <p>Which video has better overall quality? (sharper, more realistic scene, smoother motion — no glitches or sudden jumps)</p>
                     <label><input type="radio" name="quality" value="A" ${checked('quality','A')}> Model A</label>
                     <label><input type="radio" name="quality" value="equal" ${checked('quality','equal')}> About equal</label>
                     <label><input type="radio" name="quality" value="B" ${checked('quality','B')}> Model B</label>
