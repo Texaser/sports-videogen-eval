@@ -333,7 +333,7 @@
                     </div>
                 </div>
                 <div class="questions">
-                    <p>In which video do the players better stay inside or close to the colored rectangles throughout the video?</p>
+                    <p>In which video do the generated players better stay inside or close to the colored rectangles throughout the video?</p>
                     <label><input type="radio" name="trajectory" value="A" ${checked('trajectory','A')}> Model A</label>
                     <label><input type="radio" name="trajectory" value="equal" ${checked('trajectory','equal')}> About equal</label>
                     <label><input type="radio" name="trajectory" value="B" ${checked('trajectory','B')}> Model B</label>
@@ -355,12 +355,15 @@
                     </div>
                 </div>
                 <div class="questions">
-                    <p>In which video do the players look more like real people? (realistic body shape, clothing, and movement — not blurry or distorted)</p>
+                    <p>In which video do the generated players look more like real people? (realistic body shape, clothing, and movement — not blurry or distorted)</p>
                     <label><input type="radio" name="appearance" value="A" ${checked('appearance','A')}> Model A</label>
                     <label><input type="radio" name="appearance" value="equal" ${checked('appearance','equal')}> About equal</label>
                     <label><input type="radio" name="appearance" value="B" ${checked('appearance','B')}> Model B</label>
-                    <br><br>
-                    <p>Which video has better overall quality? (sharper, more realistic scene, smoother motion — no glitches or sudden jumps)</p>
+                </div>
+
+                <p class="step-label">Step 3: Considering everything above, which model is better overall?</p>
+                <div class="questions" style="margin-top: 5px;">
+                    <p>Taking into account <em>both</em> how well the generated players follow the target positions (Step 1) and the visual quality (Step 2), which model produces the better video overall?</p>
                     <label><input type="radio" name="quality" value="A" ${checked('quality','A')}> Model A</label>
                     <label><input type="radio" name="quality" value="equal" ${checked('quality','equal')}> About equal</label>
                     <label><input type="radio" name="quality" value="B" ${checked('quality','B')}> Model B</label>
