@@ -345,7 +345,7 @@
             const instruction = caption.instruction || 'Instruction not available';
             const playerSpecs = formatPlayerSpecs(caption.player_specifications);
 
-            const gtVideo = getVideoPath("gt", sample.filename);
+            const gtVideo = getVideoPath("gt_bbox", sample.filename);
             const oursBbox = getVideoPath("ours_bbox", sample.filename);
             const compBbox = getVideoPath(competitor + "_bbox", sample.filename);
             const oursClean = getVideoPath("ours", sample.filename);
