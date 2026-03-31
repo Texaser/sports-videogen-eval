@@ -304,11 +304,7 @@
 
         function formatPlayerSpecs(specs) {
             if (!specs || specs.length === 0) return '';
-            return specs.map(p => {
-                let desc = `<b>Player ${p.jersey_number}</b>`;
-                if (p.action) desc += ` — Action: <em>${p.action}</em>`;
-                return desc;
-            }).join('<br>');
+            return specs.map(p => `<b>Player ${p.jersey_number}</b>`).join(', ');
         }
 
         async function initSamples() {
