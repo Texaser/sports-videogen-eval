@@ -1,6 +1,6 @@
 {
   "1037_Nigel_Williams-Goss_Foul_288466326": {
-    "instruction": "Simulate Defender #1 defended a player who is performing foul.",
+    "instruction": "Simulate Player #1 drawing a foul.",
     "player_specifications": [
       {
         "jersey_number": "#1",
@@ -51,7 +51,7 @@
     "refined_instruction": "Simulate Defender #1 draws a foul."
   },
   "1109_Edgaras_Ulanovas_2-_262040613": {
-    "instruction": "Simulate Player #92 executing 2 Pt Missed during a Pick'n'Roll from Low Post with a Floater using a Changing direction with the Left hand while contested and another player #8 executing rebound.",
+    "instruction": "Simulate Player #92 attempting a contested floater from the low post during a pick-and-roll after changing direction with the left hand, while Player #8 sets the screen, resulting in a miss.",
     "player_specifications": [
       {
         "jersey_number": "#92",
@@ -137,7 +137,7 @@
     "refined_instruction": "Simulate Player #92 missing a 2-pointer during a Pick'n'Roll from the Low Post, performing a floater with a changing direction dribble using the left hand while contested, as Player #8 secures the rebound."
   },
   "1861_Cameron_Payne_Foul_254688547": {
-    "instruction": "Simulate Player #15 executing Foul.",
+    "instruction": "Simulate Player #15 executing a foul.",
     "player_specifications": [
       {
         "jersey_number": "#15",
@@ -193,7 +193,7 @@
     "refined_instruction": "Simulate Defender #15 draws a foul."
   },
   "1881_Marcus_Morris_Rebound_247840436": {
-    "instruction": "Simulate Player #8 executing Rebound.",
+    "instruction": "Simulate Player #8 securing a rebound.",
     "player_specifications": [
       {
         "jersey_number": "#8",
@@ -244,7 +244,7 @@
     "refined_instruction": "Simulate Player #8 securing a rebound."
   },
   "2904_Ivan_Majcunic_Foul_280822170": {
-    "instruction": "Simulate Defender #2 defended a player who is performing foul.",
+    "instruction": "Simulate Player #2 drawing a foul.",
     "player_specifications": [
       {
         "jersey_number": "#2",
@@ -295,7 +295,7 @@
     "refined_instruction": "Simulate Defender #2 draws a foul."
   },
   "4735_Rolands_Smits_Foul_270755942": {
-    "instruction": "Simulate Defender #16 defended a player who is performing foul.",
+    "instruction": "Simulate Player #16 drawing a foul.",
     "player_specifications": [
       {
         "jersey_number": "#16",
@@ -346,7 +346,7 @@
     "refined_instruction": "Simulate Defender #16 draws a foul."
   },
   "476341_Charles_OBannon_Jr__3-_271451948": {
-    "instruction": "Simulate Player #5 executing 3 Pt Missed during a Catch and shoot from Corner with a Jumper using a Jab step with the Right hand while contested.",
+    "instruction": "Simulate Player #5 attempting a contested corner three-point jumper following a jab step, resulting in a miss.",
     "player_specifications": [
       {
         "jersey_number": "#5",
@@ -405,7 +405,7 @@
     "refined_instruction": "Simulate Player #5 executing a 3 PT Missed during a Catch and Shoot from the Corner with a Jumper, utilizing a Jab Step with the Right hand while Contested."
   },
   "531247_Keenan_Fitzmorris_2-_264466774": {
-    "instruction": "Simulate Defender #35 forced a missed restricted area post two under tight contest.",
+    "instruction": "Simulate Player #35 contesting a shot in the restricted area during a post play and forcing a miss.",
     "player_specifications": [
       {
         "jersey_number": "#35",
@@ -456,7 +456,7 @@
     "refined_instruction": "Simulate Defender #35 contested a missed shot in the restricted area during a post play."
   },
   "6836_Anthony_Gill_2-_266421983": {
-    "instruction": "Simulate Defender #9 forced a missed restricted area isolation two under tight contest.",
+    "instruction": "Simulate Player #9 forcing a missed two-point shot in the restricted area during an isolation under tight contest.",
     "player_specifications": [
       {
         "jersey_number": "#9",
@@ -507,7 +507,7 @@
     "refined_instruction": "Simulate Defender #9 forces a missed 2 PT shot in the restricted area during an isolation play under tight contest."
   },
   "7858_Dante_Exum_Foul_255173111": {
-    "instruction": "Simulate Defender #20 defended a player who is performing foul.",
+    "instruction": "Simulate Player #20 drawing a foul.",
     "player_specifications": [
       {
         "jersey_number": "#20",
@@ -558,7 +558,7 @@
     "refined_instruction": "Simulate Defender #20 draws a foul."
   },
   "8420_Eric_Bledsoe_2p_259154652": {
-    "instruction": "Simulate Player #10 executing Pick'N'Roll.",
+    "instruction": "Simulate Player #10 executing a Pick'n'Roll.",
     "player_specifications": [
       {
         "jersey_number": "#10",
@@ -609,7 +609,7 @@
     "refined_instruction": "Simulate Player #10 executing a Pick'n'Roll."
   },
   "8488_Panagiotis_Kalaitzakis_3-_279719388": {
-    "instruction": "Simulate Player #0 executing 3 Pt Missed during a Screen off from Corner with a Jumper with the Right hand while contested and another player #6 executing screen, guarded by a defender #1.",
+    "instruction": "Simulate Player #0 missing a contested three-point jumper from the corner off a screen set by Player #6, defended by Player #1.",
     "player_specifications": [
       {
         "jersey_number": "#0",
@@ -722,7 +722,7 @@
     "refined_instruction": "Simulate Player #0 missing a 3-pointer during a Screen off from the Corner with a Jumper using the Right hand, while contested, as Player #6 sets the screen and is guarded by Defender #1."
   },
   "8810_Alessandro_Pajola_Rebound_245087411": {
-    "instruction": "Simulate Player #6 executing Rebound.",
+    "instruction": "Simulate Player #6 securing a rebound.",
     "player_specifications": [
       {
         "jersey_number": "#6",
@@ -773,7 +773,7 @@
     "refined_instruction": "Simulate Player #6 securing a Rebound."
   },
   "93143_Duop_Reath_2-_261350550": {
-    "instruction": "Simulate Defender #20 forced a missed low post post two under tight contest.",
+    "instruction": "Simulate Player #20 forcing a contested miss on a low-post shot.",
     "player_specifications": [
       {
         "jersey_number": "#20",
