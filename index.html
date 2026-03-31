@@ -51,11 +51,19 @@
         .video-container {
             display: flex;
             justify-content: center;
+            align-items: center;
             margin-bottom: 10px;
+            gap: 30px;
         }
         .video-wrapper {
             text-align: center;
-            margin: 0 15px;
+        }
+        .video-wrapper video {
+            display: block;
+            width: 480px;
+            height: 270px;
+            object-fit: contain;
+            background: #000;
         }
         .video-wrapper p {
             font-weight: bold;
