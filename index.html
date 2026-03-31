@@ -165,7 +165,7 @@
         <h3>What will you see?</h3>
         <p>For each example, you will see <b>three groups of videos</b>:</p>
         <ol>
-            <li><b>Ground Truth Video</b> — This is the <em>real, original</em> video of the sports scene. The player trajectories are extracted from this video, and the generated videos are expected to follow these trajectories, but are <b>not</b> required to visually match the ground truth video. It is provided for scene context only.</li>
+            <li><b>Ground Truth Video</b> — This is the <em>real, original</em> video of the sports scene. The player trajectories are extracted from this video, and the generated videos are expected to follow these trajectories, but are <b>not</b> required to look exactly the same as the ground truth video. It is provided for scene context only.</li>
             <li><b>Step 1 — Videos with colored rectangles (bounding boxes)</b><br>
                 You will see two AI-generated videos (Model A and Model B), each with <b>colored rectangles drawn around where players should be</b>. These rectangles show the <em>target positions</em> — i.e., where the AI was told to place the players at each moment.<br>
                 <span style="color:#d9534f;"><b>What to look for:</b></span> Do the generated players actually appear <em>inside</em> or <em>close to</em> the colored rectangles? A good model will have players that closely follow these rectangles throughout the video. A bad model will have players that drift away, appear in wrong positions, or are missing entirely.
@@ -313,7 +313,7 @@
                         <video width="480" height="270" controls preload="metadata">
                             <source src="${gtVideo}" type="video/mp4">
                         </video>
-                        <p class="gt-label">Real video for scene context — generated videos are not expected to visually match this.</p>
+                        <p class="gt-label">Real video for scene context — generated videos do not need to look exactly the same.</p>
                     </div>
                 </div>
 
