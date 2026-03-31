@@ -61,9 +61,7 @@
         .video-wrapper video {
             display: block;
             width: 480px;
-            height: 270px;
-            object-fit: contain;
-            background: #000;
+            height: auto;
         }
         .video-wrapper p {
             font-weight: bold;
@@ -330,7 +328,7 @@
                 <p class="step-label">Ground Truth (Real Video)</p>
                 <div class="video-container">
                     <div class="video-wrapper">
-                        <video width="480" height="270" controls preload="metadata">
+                        <video width="480" controls preload="metadata">
                             <source src="${gtVideo}" type="video/mp4">
                         </video>
                         <p class="gt-label">Real video for scene context — generated videos do not need to look exactly the same.</p>
@@ -340,13 +338,13 @@
                 <p class="step-label">Step 1: Do the players follow the target positions? (colored rectangles = where players should be)</p>
                 <div class="video-container">
                     <div class="video-wrapper">
-                        <video width="480" height="270" controls preload="metadata">
+                        <video width="480" controls preload="metadata">
                             <source src="${videoA_bbox}" type="video/mp4">
                         </video>
                         <p>Model A</p>
                     </div>
                     <div class="video-wrapper">
-                        <video width="480" height="270" controls preload="metadata">
+                        <video width="480" controls preload="metadata">
                             <source src="${videoB_bbox}" type="video/mp4">
                         </video>
                         <p>Model B</p>
@@ -362,13 +360,13 @@
                 <p class="step-label">Step 2: Which video looks better? (same videos, without rectangles)</p>
                 <div class="video-container">
                     <div class="video-wrapper">
-                        <video width="480" height="270" controls preload="metadata">
+                        <video width="480" controls preload="metadata">
                             <source src="${videoA_clean}" type="video/mp4">
                         </video>
                         <p>Model A</p>
                     </div>
                     <div class="video-wrapper">
-                        <video width="480" height="270" controls preload="metadata">
+                        <video width="480" controls preload="metadata">
                             <source src="${videoB_clean}" type="video/mp4">
                         </video>
                         <p>Model B</p>
