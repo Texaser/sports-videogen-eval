@@ -198,7 +198,7 @@
 
         <p><b>First Frame & Last Frame</b> — Below the Ground Truth video, you will see two reference images side by side. The <b>first frame</b> shows the starting position of the target player(s), and the <b>last frame</b> shows the target position they should reach. Each player is marked with a different colored rectangle. Use these to understand where players start and where they should end up.</p>
 
-        <p><b>Text Instruction</b> — A written description of what the AI was told to generate. Read this carefully before watching the generated videos.</p>
+        <p><b>Text Instruction</b> — A written description of what the AI was told to generate. Players are referred to by <b>colored rectangles</b> instead of jersey numbers — for example, <em>"Player in a <span style="color:#e53935; font-weight:bold;">red</span> rectangle"</em>. The color matches the rectangle drawn around that player in the videos. Read this carefully before watching the generated videos.</p>
 
         <div style="background:#e8f5e9; border-left:4px solid #4CAF50; padding:12px 16px; margin:12px 0; border-radius:4px;">
             <b style="color:#2e7d32; font-size:15px;">Step 1 — Target Player Positioning</b><br>
@@ -297,9 +297,35 @@
             return competitorMethods[Math.floor(Math.random() * competitorMethods.length)];
         }
 
+        const playerColors = ['#e53935', '#43a047', '#f9a825'];
+        const playerColorNames = ['red', 'green', 'yellow'];
+
         function formatPlayerSpecs(specs) {
             if (!specs || specs.length === 0) return '';
-            return specs.map(p => `<b>Player ${p.jersey_number}</b>`).join(', ');
+            return specs.map((p, i) => {
+                const color = playerColors[i] || '#555';
+                const colorName = playerColorNames[i] || 'colored';
+                return `<b>Player in a <span style="color:${color}; font-weight:bold;">${colorName}</span> rectangle</b>`;
+            }).join(', ');
+        }
+
+        function colorizeInstruction(instruction, specs) {
+            if (!specs || specs.length === 0) return instruction;
+            let result = instruction;
+            specs.forEach((p, i) => {
+                const color = playerColors[i] || '#555';
+                const colorName = playerColorNames[i] || 'colored';
+                const regex = new RegExp(`Player\\s*${p.jersey_number.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'g');
+                result = result.replace(regex, `Player in a <span style="color:${color}; font-weight:bold;">${colorName}</span> rectangle`);
+            });
+            // Also handle "Defender #X" pattern
+            specs.forEach((p, i) => {
+                const color = playerColors[i] || '#555';
+                const colorName = playerColorNames[i] || 'colored';
+                const regex = new RegExp(`Defender\\s*${p.jersey_number.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'g');
+                result = result.replace(regex, `Player in a <span style="color:${color}; font-weight:bold;">${colorName}</span> rectangle`);
+            });
+            return result;
         }
 
         async function initSamples() {
@@ -337,7 +363,8 @@
             const competitor = info.competitor;
 
             const caption = captions[sample.filename] || {};
-            const instruction = caption.instruction || 'Instruction not available';
+            const rawInstruction = caption.instruction || 'Instruction not available';
+            const instruction = colorizeInstruction(rawInstruction, caption.player_specifications);
             const playerSpecs = formatPlayerSpecs(caption.player_specifications);
 
             const gtVideo = getVideoPath("gt_bbox", sample.filename);
