@@ -188,7 +188,7 @@
         <h2>Instructions — Please Read Carefully</h2>
 
         <h3>What is this about?</h3>
-        <p>We are evaluating AI models that <b>generate basketball videos based on a text instruction</b>. Each model is given a written description of what should happen in the video — for example, <em>"Simulate Player #10 making a 2-point shot"</em> or <em>"Simulate Player #5 securing a rebound"</em>. The model then tries to generate a video that matches this description.</p>
+        <p>We are evaluating AI models that <b>generate basketball videos based on a text instruction</b>. Each model is given a written description of what should happen in the video — for example, <em>"Simulate Player in a <span style="color:#e53935; font-weight:bold;">red</span> rectangle securing a rebound"</em>. The model then tries to generate a video that matches this description.</p>
         <p>Your job is to compare two models and tell us which one better follows the instruction.</p>
 
         <h3>What will you see?</h3>
@@ -202,7 +202,7 @@
 
         <div style="background:#e8f5e9; border-left:4px solid #4CAF50; padding:12px 16px; margin:12px 0; border-radius:4px;">
             <b style="color:#2e7d32; font-size:15px;">Step 1 — Target Player Positioning</b><br>
-            You will see two AI-generated videos (Model A and Model B) with <b style="color:#d9534f;">colored rectangles</b> drawn on them. The rectangle in the <b>first frame</b> indicates the <b>starting position</b> of the target player (identified by the jersey number in the instruction), and the rectangle in the <b>final frame</b> indicates the <b>target position</b> the player should reach by the end of the video.<br><br>
+            You will see two AI-generated videos (Model A and Model B) with <b style="color:#d9534f;">colored rectangles</b> drawn on them. The rectangle in the <b>first frame</b> indicates the <b>starting position</b> of the target player (identified by the colored rectangle in the instruction), and the rectangle in the <b>final frame</b> indicates the <b>target position</b> the player should reach by the end of the video.<br><br>
             <b>What to look for:</b> Does the <b>target player</b> move from the starting position to the correct target location? Is the player near the target rectangle at the end of the video?<br>
             <span style="color:#2e7d32;">A good model:</span> the target player ends up at or near the specified target position.<br>
             <span style="color:#d9534f;">A bad model:</span> the player is far from the target position, or the wrong player moves to that location.
@@ -212,7 +212,7 @@
             <b style="color:#1565c0; font-size:15px;">Step 2 — Action Correctness</b><br>
             You will see the same two generated videos <em>without</em> the colored rectangles. Now focus on <b>whether the action described in the instruction actually happens in the video</b>.<br><br>
             <b>What to look for:</b><br>
-            - Is the <b>correct player</b> performing the action (check the jersey number)?<br>
+            - Is the <b>correct player</b> performing the action (check the colored rectangle)?<br>
             - Does the action <b>match the instruction</b>? For example: if the instruction says "rebound", does the player grab the ball after a missed shot? If it says "foul", is there a foul-like contact? If it says "pick and roll", does the player set a screen and roll?<br>
             - Does the <b>outcome</b> match? For example, "missed shot" should show a miss, not a made basket.<br><br>
             <span style="color:#1565c0;">You do <b>not</b> need basketball expertise</span> — just check whether what you see in the video reasonably matches what the instruction describes. Use common sense.
@@ -430,7 +430,7 @@
                     </div>
                 </div>
                 <div class="questions">
-                    <p>In which video does the target player (see jersey number above) better reach the correct final position shown by the colored rectangles?</p>
+                    <p>In which video does the target player (identified by the colored rectangle in the instruction) better reach the correct final position?</p>
                     <label><input type="radio" name="positioning" value="A" ${checked('positioning','A')}> Model A</label>
                     <label><input type="radio" name="positioning" value="equal" ${checked('positioning','equal')}> About equal</label>
                     <label><input type="radio" name="positioning" value="B" ${checked('positioning','B')}> Model B</label>
