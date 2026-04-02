@@ -484,11 +484,16 @@
                 video.addEventListener('play', () => {
                     if (syncing) return;
                     syncing = true;
-                    allVideos.forEach(v => { if (v !== video && v.paused) v.play(); });
+                    allVideos.forEach(v => {
+                        if (v !== video && v.paused) {
+                            if (v.ended) v.currentTime = 0;
+                            v.play();
+                        }
+                    });
                     syncing = false;
                 });
                 video.addEventListener('pause', () => {
-                    if (syncing) return;
+                    if (syncing || video.ended) return;
                     syncing = true;
                     allVideos.forEach(v => { if (v !== video && !v.paused) v.pause(); });
                     syncing = false;
