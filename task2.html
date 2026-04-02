@@ -477,6 +477,20 @@
                 });
             }
 
+            // Sync all videos: play/pause/seek together
+            const allVideos = document.querySelectorAll('.pair-section video');
+            allVideos.forEach(video => {
+                video.addEventListener('play', () => {
+                    allVideos.forEach(v => { if (v !== video && v.paused) v.play(); });
+                });
+                video.addEventListener('pause', () => {
+                    allVideos.forEach(v => { if (v !== video && !v.paused) v.pause(); });
+                });
+                video.addEventListener('seeked', () => {
+                    allVideos.forEach(v => { if (v !== video) v.currentTime = video.currentTime; });
+                });
+            });
+
             document.getElementById('progress-text').textContent = `${index + 1} / ${totalPairs}`;
             document.getElementById('prev-btn').disabled = (index === 0);
 
