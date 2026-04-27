@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Video Evaluation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        h1 { margin-bottom: 5px; }
+        .intro {
+            text-align: left;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px 30px;
+            margin: 20px auto 30px;
+            max-width: 900px;
+            line-height: 1.6;
+        }
+        .intro h2 { margin-top: 0; text-align: center; }
+        .intro ul { padding-left: 20px; }
+        .intro li { margin-bottom: 6px; }
+        .pair-section {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .pair-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .step-label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            gap: 30px;
+        }
+        .video-wrapper {
+            text-align: center;
+            width: 480px;
+            flex-shrink: 0;
+        }
+        .video-wrapper video {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .video-wrapper p {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .questions {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .questions p {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .questions label {
+            margin: 0 10px;
+        }
+        .instruction-box {
+            background: #f3e5f5;
+            border: 2px solid #9c27b0;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 15px auto;
+            max-width: 900px;
+            text-align: left;
+        }
+        .instruction-box .instruction-text {
+            font-size: 16px;
+            color: #4a148c;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+        .instruction-box .player-info {
+            font-size: 14px;
+            color: #555;
+            margin: 4px 0;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .nav-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .nav-btn:hover { background-color: #45a049; }
+        .nav-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .progress {
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            max-width: 500px;
+            margin: auto;
+        }
+        .close-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            display: none;
+        }
+        button[type="submit"]:hover, .close-btn:hover {
+            background-color: #45a049;
+        }
+        .warning {
+            color: #d9534f;
+            font-weight: bold;
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sports Video Evaluation</h1>
+
+    <div class="intro" id="intro-section">
+        <h2>Instructions — Please Read Carefully</h2>
+
+        <h3>What is this about?</h3>
+        <p>We are comparing two models that produce <b>basketball video clips based on a text instruction</b>. Each model is given a written description of what should happen in the video — for example, <em>"Simulate Player in a <span style="color:#e53935; font-weight:bold;">red</span> rectangle securing a rebound"</em>. The model then produces a video that tries to match this description.</p>
+        <p>Your job is to compare the two videos — labeled simply <b>Model A</b> and <b>Model B</b> — and tell us which one better follows the instruction and looks better.</p>
+
+        <h3>What will you see?</h3>
+        <p><b>Text Instruction</b> — A written description of what the model was asked to produce. Players are referred to by <b>colored rectangles</b> — for example, <em>"Player in a <span style="color:#e53935; font-weight:bold;">red</span> rectangle"</em>. The color matches the rectangle drawn around that player in the videos. Read this carefully before watching the videos.</p>
+
+        <p>For each example, you will compare the two videos across <b>3 steps</b>:</p>
+
+        <div style="background:#e8f5e9; border-left:4px solid #4CAF50; padding:12px 16px; margin:12px 0; border-radius:4px;">
+            <b style="color:#2e7d32; font-size:15px;">Step 1 — Target Player Positioning</b><br>
+            You will see two videos (Model A and Model B) with <b style="color:#d9534f;">colored rectangles</b> drawn on them. The rectangle in the <b>first frame</b> shows where the target player <b>starts</b>, and the rectangle in the <b>final frame</b> shows where the target player <b>should end up</b> by the end of the video.<br><br>
+            <b>What to look for:</b> Does the <b>target player</b> (identified by the colored rectangle in the instruction) move from the starting position to the correct final position? Is the player near the target rectangle at the end of the video?<br>
+            <span style="color:#2e7d32;">A good video:</span> the target player ends up at or near the specified target rectangle.<br>
+            <span style="color:#d9534f;">A bad video:</span> the player is far from the target position, or the wrong player moves to that location.
+        </div>
+
+        <div style="background:#e3f2fd; border-left:4px solid #2196F3; padding:12px 16px; margin:12px 0; border-radius:4px;">
+            <b style="color:#1565c0; font-size:15px;">Step 2 — Action Correctness</b><br>
+            You will see the same two videos <em>without</em> the colored rectangles. Now focus on <b>whether the action described in the instruction actually happens in the video</b>.<br><br>
+            <b>What to look for:</b><br>
+            - Is the <b>correct player</b> performing the action (check the colored rectangle from Step 1)?<br>
+            - Does the action <b>match the instruction</b>? For example: if the instruction says "rebound", does the player grab the ball after a missed shot? If it says "foul", is there a foul-like contact? If it says "pick and roll", does the player set a screen and roll?<br>
+            - Does the <b>outcome</b> match? For example, "missed shot" should show a miss, not a made basket.<br><br>
+            <span style="color:#1565c0;">You do <b>not</b> need basketball expertise</span> — just check whether what you see in the video reasonably matches what the instruction describes. Use common sense.
+        </div>
+
+        <div style="background:#fff3e0; border-left:4px solid #FF9800; padding:12px 16px; margin:12px 0; border-radius:4px;">
+            <b style="color:#e65100; font-size:15px;">Step 3 — Overall Quality</b><br>
+            Considering <b>everything</b> — player positioning (Step 1), action correctness (Step 2), and general video quality — which video is better overall?<br><br>
+            <b>Think about:</b> Does the video look <b>sharp and realistic</b>? Do players look like real people (not blurry or distorted)? Does the video flow <b>smoothly</b>? Combined with how well it follows the instruction — which one is better <b>overall</b>?
+        </div>
+
+        <h3>Tips</h3>
+        <ul>
+            <li>You do <b>not</b> need basketball expertise — just compare what you see against the written instruction.</li>
+            <li>Read the <b>instruction carefully</b> before watching the videos.</li>
+            <li>If both videos look equally good (or equally bad), you can select <b>"About equal"</b>.</li>
+            <li>You can go back to change your answers using the "Previous" button.</li>
+            <li>Examples are <b>randomly sampled</b> and not cherry-picked.</li>
+        </ul>
+
+        <div style="background:#fff8e1; border:2px solid #f44336; padding:12px 16px; margin:12px 0; border-radius:4px;">
+            <b style="color:#d32f2f;">Important:</b> Please <b>watch both videos carefully and fully</b> before making your selection.
+        </div>
+    </div>
+
+    <form id="evaluation-form">
+        <div id="current-pair"></div>
+        <p class="warning" id="warning-msg">Please answer all questions before proceeding.</p>
+        <div class="nav-bar">
+            <button type="button" class="nav-btn" id="prev-btn" disabled>Previous</button>
+            <span class="progress" id="progress-text">1 / 14</span>
+            <button type="button" class="nav-btn" id="next-btn">Next</button>
+        </div>
+        <button type="submit" id="submit-btn">Submit All Results</button>
+    </form>
+
+    <div id="thank-you-modal" class="modal">
+        <div class="modal-content">
+            <p>Thank you for your submission!</p>
+            <button class="close-btn" id="close-btn">OK</button>
+        </div>
+    </div>
+
+    <script>
+        const totalPairs = 14;
+        let currentIndex = 0;
+
+        let answers = Array(totalPairs).fill(null).map(() => ({
+            positioning: null,
+            action: null,
+            quality: null
+        }));
+
+        let pairInfo = [];
+        let captions = {};
+
+        const sampleList = [
+            "1037_Nigel_Williams-Goss_Foul_288466326",
+            "1109_Edgaras_Ulanovas_2-_262040613",
+            "1861_Cameron_Payne_Foul_254688547",
+            "1881_Marcus_Morris_Rebound_247840436",
+            "2904_Ivan_Majcunic_Foul_280822170",
+            "4735_Rolands_Smits_Foul_270755942",
+            "476341_Charles_OBannon_Jr__3-_271451948",
+            "531247_Keenan_Fitzmorris_2-_264466774",
+            "6836_Anthony_Gill_2-_266421983",
+            "7858_Dante_Exum_Foul_255173111",
+            "8420_Eric_Bledsoe_2p_259154652",
+            "8488_Panagiotis_Kalaitzakis_3-_279719388",
+            "8810_Alessandro_Pajola_Rebound_245087411",
+            "93143_Duop_Reath_2-_261350550"
+        ];
+
+        let allSamples = [];
+
+        function getVideoPath(method, filename) {
+            return `./task2_eval/${method}/${filename}.mp4`;
+        }
+
+        const playerColors = ['#e53935', '#43a047', '#f9a825'];
+        const playerColorNames = ['red', 'green', 'yellow'];
+
+        function formatPlayerSpecs(specs) {
+            if (!specs || specs.length === 0) return '';
+            return specs.map((p, i) => {
+                const color = playerColors[i] || '#555';
+                const colorName = playerColorNames[i] || 'colored';
+                return `<b>Player in a <span style="color:${color}; font-weight:bold;">${colorName}</span> rectangle</b>`;
+            }).join(', ');
+        }
+
+        function colorizeInstruction(instruction, specs) {
+            if (!specs || specs.length === 0) return instruction;
+            let result = instruction;
+            specs.forEach((p, i) => {
+                const color = playerColors[i] || '#555';
+                const colorName = playerColorNames[i] || 'colored';
+                const regex = new RegExp(`Player\\s*${p.jersey_number.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'g');
+                result = result.replace(regex, `Player in a <span style="color:${color}; font-weight:bold;">${colorName}</span> rectangle`);
+            });
+            specs.forEach((p, i) => {
+                const color = playerColors[i] || '#555';
+                const colorName = playerColorNames[i] || 'colored';
+                const regex = new RegExp(`Defender\\s*${p.jersey_number.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'g');
+                result = result.replace(regex, `Player in a <span style="color:${color}; font-weight:bold;">${colorName}</span> rectangle`);
+            });
+            return result;
+        }
+
+        async function initSamples() {
+            try {
+                const resp = await fetch('./task2_eval/captions.json');
+                captions = await resp.json();
+            } catch (e) {
+                console.error('Failed to load captions:', e);
+            }
+
+            allSamples = sampleList.map(f => ({ filename: f }));
+            // Shuffle
+            for (let i = allSamples.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allSamples[i], allSamples[j]] = [allSamples[j], allSamples[i]];
+            }
+
+            // Randomize whether ours or gt is in slot A for each example
+            for (let i = 0; i < totalPairs; i++) {
+                pairInfo[i] = {
+                    filename: allSamples[i].filename,
+                    oursInA: Math.random() < 0.5
+                };
+            }
+
+            renderPair(0);
+        }
+
+        function renderPair(index) {
+            const container = document.getElementById('current-pair');
+            const sample = allSamples[index];
+            const info = pairInfo[index];
+            const oursInA = info.oursInA;
+
+            const caption = captions[sample.filename] || {};
+            const rawInstruction = caption.instruction || 'Instruction not available';
+            const instruction = colorizeInstruction(rawInstruction, caption.player_specifications);
+            const playerSpecs = formatPlayerSpecs(caption.player_specifications);
+
+            const oursBbox = getVideoPath("ours_bbox", sample.filename);
+            const gtBbox = getVideoPath("gt_bbox", sample.filename);
+            const oursClean = getVideoPath("ours", sample.filename);
+            const gtClean = getVideoPath("gt", sample.filename);
+
+            const videoA_bbox = oursInA ? oursBbox : gtBbox;
+            const videoB_bbox = oursInA ? gtBbox : oursBbox;
+            const videoA_clean = oursInA ? oursClean : gtClean;
+            const videoB_clean = oursInA ? gtClean : oursClean;
+
+            const saved = answers[index];
+
+            function checked(name, val) {
+                return saved[name] === val ? 'checked' : '';
+            }
+
+            container.innerHTML = `
+            <div class="pair-section">
+                <p class="pair-header">Example ${index + 1} / ${totalPairs}</p>
+
+                <div class="instruction-box">
+                    <b style="font-size:15px; color:#7b1fa2;">Instruction:</b>
+                    <p class="instruction-text">"${instruction}"</p>
+                    ${playerSpecs ? '<p class="player-info"><b>Target player(s):</b><br>' + playerSpecs + '</p>' : ''}
+                </div>
+
+                <p class="step-label">Step 1: Does the target player reach the correct position? (colored rectangles = where the target player should be)</p>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video width="480" controls preload="metadata">
+                            <source src="${videoA_bbox}" type="video/mp4">
+                        </video>
+                        <p>Model A</p>
+                    </div>
+                    <div class="video-wrapper">
+                        <video width="480" controls preload="metadata">
+                            <source src="${videoB_bbox}" type="video/mp4">
+                        </video>
+                        <p>Model B</p>
+                    </div>
+                </div>
+                <div class="questions">
+                    <p>In which video does the target player (identified by the colored rectangle in the instruction) better reach the correct final position?</p>
+                    <label><input type="radio" name="positioning" value="A" ${checked('positioning','A')}> Model A</label>
+                    <label><input type="radio" name="positioning" value="equal" ${checked('positioning','equal')}> About equal</label>
+                    <label><input type="radio" name="positioning" value="B" ${checked('positioning','B')}> Model B</label>
+                </div>
+
+                <p class="step-label">Step 2: Does the action match the instruction? (same videos, without rectangles)</p>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video width="480" controls preload="metadata">
+                            <source src="${videoA_clean}" type="video/mp4">
+                        </video>
+                        <p>Model A</p>
+                    </div>
+                    <div class="video-wrapper">
+                        <video width="480" controls preload="metadata">
+                            <source src="${videoB_clean}" type="video/mp4">
+                        </video>
+                        <p>Model B</p>
+                    </div>
+                </div>
+                <div class="questions">
+                    <p>Re-read the instruction above. In which video does the action better match what the instruction describes? (correct player, correct action, correct outcome)</p>
+                    <label><input type="radio" name="action" value="A" ${checked('action','A')}> Model A</label>
+                    <label><input type="radio" name="action" value="equal" ${checked('action','equal')}> About equal</label>
+                    <label><input type="radio" name="action" value="B" ${checked('action','B')}> Model B</label>
+                </div>
+
+                <p class="step-label">Step 3: Considering everything above, which video is better overall?</p>
+                <div class="questions" style="margin-top: 5px;">
+                    <p>Taking into account player positioning (Step 1), action correctness (Step 2), and general video quality (sharpness, realism, smoothness), which video is better overall?</p>
+                    <label><input type="radio" name="quality" value="A" ${checked('quality','A')}> Model A</label>
+                    <label><input type="radio" name="quality" value="equal" ${checked('quality','equal')}> About equal</label>
+                    <label><input type="radio" name="quality" value="B" ${checked('quality','B')}> Model B</label>
+                </div>
+            </div>
+            `;
+
+            for (const qName of ['positioning', 'action', 'quality']) {
+                document.querySelectorAll(`input[name="${qName}"]`).forEach(radio => {
+                    radio.addEventListener('change', () => {
+                        answers[currentIndex][qName] = radio.value;
+                        document.getElementById('warning-msg').style.display = 'none';
+                    });
+                });
+            }
+
+            // Sync all videos: play/pause/seek together
+            const allVideos = document.querySelectorAll('.pair-section video');
+            let syncing = false;
+            allVideos.forEach(video => {
+                video.addEventListener('play', () => {
+                    if (syncing) return;
+                    syncing = true;
+                    allVideos.forEach(v => {
+                        if (v !== video && v.paused) {
+                            if (v.ended) v.currentTime = 0;
+                            v.play();
+                        }
+                    });
+                    syncing = false;
+                });
+                video.addEventListener('pause', () => {
+                    if (syncing || video.ended) return;
+                    syncing = true;
+                    allVideos.forEach(v => { if (v !== video && !v.paused) v.pause(); });
+                    syncing = false;
+                });
+                video.addEventListener('seeked', () => {
+                    if (syncing) return;
+                    syncing = true;
+                    allVideos.forEach(v => { if (v !== video && Math.abs(v.currentTime - video.currentTime) > 0.1) v.currentTime = video.currentTime; });
+                    syncing = false;
+                });
+            });
+
+            document.getElementById('progress-text').textContent = `${index + 1} / ${totalPairs}`;
+            document.getElementById('prev-btn').disabled = (index === 0);
+
+            const isLast = (index === totalPairs - 1);
+            document.getElementById('next-btn').style.display = isLast ? 'none' : '';
+            document.getElementById('submit-btn').style.display = isLast ? '' : 'none';
+
+            document.getElementById('intro-section').style.display = (index === 0) ? '' : 'none';
+
+            window.scrollTo(0, 0);
+        }
+
+        function currentAnswersComplete() {
+            const a = answers[currentIndex];
+            return a.positioning && a.action && a.quality;
+        }
+
+        document.getElementById('next-btn').addEventListener('click', function() {
+            if (!currentAnswersComplete()) {
+                document.getElementById('warning-msg').style.display = 'block';
+                return;
+            }
+            document.getElementById('warning-msg').style.display = 'none';
+            currentIndex++;
+            renderPair(currentIndex);
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', function() {
+            document.getElementById('warning-msg').style.display = 'none';
+            currentIndex--;
+            renderPair(currentIndex);
+        });
+
+        document.getElementById('evaluation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            if (!currentAnswersComplete()) {
+                document.getElementById('warning-msg').style.display = 'block';
+                return;
+            }
+
+            const results = [];
+            for (let i = 0; i < totalPairs; i++) {
+                const info = pairInfo[i];
+                const a = answers[i];
+
+                function resolveChoice(pick) {
+                    if (pick === "equal") return "equal";
+                    if (pick === "A") return info.oursInA ? "ours" : "gt";
+                    return info.oursInA ? "gt" : "ours";
+                }
+
+                results.push({
+                    pair: i + 1,
+                    filename: info.filename,
+                    ours_slot: info.oursInA ? "A" : "B",
+                    positioning_winner: resolveChoice(a.positioning),
+                    action_winner: resolveChoice(a.action),
+                    quality_winner: resolveChoice(a.quality)
+                });
+            }
+
+            console.log("Evaluation Results:", JSON.stringify(results, null, 2));
+            alert("Results logged to console:\n" + JSON.stringify(results, null, 2));
+            document.getElementById('thank-you-modal').style.display = 'flex';
+        });
+
+        document.getElementById('close-btn').addEventListener('click', function() {
+            location.reload();
+        });
+
+        window.onload = function() {
+            initSamples();
+        };
+    </script>
+</body>
+</html>
