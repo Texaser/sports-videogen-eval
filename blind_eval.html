@@ -234,7 +234,7 @@
         <p class="warning" id="warning-msg">Please answer all questions before proceeding.</p>
         <div class="nav-bar">
             <button type="button" class="nav-btn" id="prev-btn" disabled>Previous</button>
-            <span class="progress" id="progress-text">1 / 14</span>
+            <span class="progress" id="progress-text">1 / 30</span>
             <button type="button" class="nav-btn" id="next-btn">Next</button>
         </div>
         <button type="submit" id="submit-btn">Submit All Results</button>
@@ -248,7 +248,7 @@
     </div>
 
     <script>
-        const totalPairs = 14;
+        const totalPairs = 30;
         let currentIndex = 0;
 
         let answers = Array(totalPairs).fill(null).map(() => ({
@@ -321,12 +321,22 @@
                 console.error('Failed to load captions:', e);
             }
 
-            allSamples = sampleList.map(f => ({ filename: f }));
-            // Shuffle
-            for (let i = allSamples.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [allSamples[i], allSamples[j]] = [allSamples[j], allSamples[i]];
+            // Expand to totalPairs by repeating shuffled passes of sampleList.
+            // Avoid adjacent duplicates across pass boundaries.
+            allSamples = [];
+            while (allSamples.length < totalPairs) {
+                const pass = sampleList.map(f => ({ filename: f }));
+                for (let i = pass.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [pass[i], pass[j]] = [pass[j], pass[i]];
+                }
+                if (allSamples.length > 0 && pass.length > 1 &&
+                    pass[0].filename === allSamples[allSamples.length - 1].filename) {
+                    [pass[0], pass[1]] = [pass[1], pass[0]];
+                }
+                allSamples.push(...pass);
             }
+            allSamples = allSamples.slice(0, totalPairs);
 
             // Randomize whether ours or gt is in slot A for each example
             for (let i = 0; i < totalPairs; i++) {
